@@ -2081,8 +2081,13 @@ function showMain() {
 }
 
 // Re-observe elements when returning to main
+// Nur für echte Anker-Links (die zu Sektionen springen), nicht für Legal-Page-Links
 document.addEventListener('click', (e) => {
-  if (e.target.matches('.nav-logo, .nav-links a, .nav-cta, .footer-col a[href^="#"]')) {
+  const link = e.target.closest('a');
+  if (!link) return;
+  const href = link.getAttribute('href');
+  // Nur wenn href ein Anker zu einer Sektion ist (z.B. "#work"), zurück zur Hauptseite
+  if (href && href.startsWith('#') && href.length > 1) {
     showMain();
   }
 });
