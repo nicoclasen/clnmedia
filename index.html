@@ -701,6 +701,116 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+/* Steigender Graph im Hintergrund */
+.mix-graph {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.mix-graph svg { width: 100%; height: 100%; }
+
+.graph-line {
+  fill: none;
+  stroke: #2BFF88;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(43, 255, 136, 0.55));
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+.mix.live .graph-line { animation: drawLine 2.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+.graph-area {
+  fill: url(#graphFade);
+  opacity: 0;
+}
+
+.mix.live .graph-area { animation: fadeArea 1.6s ease 1.1s forwards; }
+
+.graph-dot {
+  fill: #2BFF88;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(43, 255, 136, 0.9));
+}
+
+.mix.live .graph-dot { animation: popDot 0.5s ease 2.4s forwards, pulseDot 2.2s ease-in-out 2.9s infinite; }
+
+@keyframes drawLine { to { stroke-dashoffset: 0; } }
+@keyframes fadeArea { to { opacity: 0.5; } }
+@keyframes popDot  { to { opacity: 1; } }
+@keyframes pulseDot {
+  0%, 100% { r: 5; }
+  50%      { r: 7.5; }
+}
+
+/* Kennzahl-Chip */
+.mix-stat {
+  position: absolute;
+  left: 6%;
+  bottom: 12%;
+  z-index: 4;
+  background: rgba(10, 10, 11, 0.86);
+  border: 1px solid rgba(43, 255, 136, 0.35);
+  border-radius: 12px;
+  padding: 12px 16px;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.mix.live .mix-stat { animation: statIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; }
+
+@keyframes statIn { to { opacity: 1; transform: translateY(0); } }
+
+.mix-stat-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.mix-stat-value {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 30px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--text);
+}
+
+.mix-stat-arrow {
+  color: #2BFF88;
+  font-size: 17px;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(43, 255, 136, 0.6));
+}
+
+.mix-stat-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mix.live .graph-line { animation: none; stroke-dashoffset: 0; }
+  .mix.live .graph-area { animation: none; opacity: 0.5; }
+  .mix.live .graph-dot  { animation: none; opacity: 1; }
+  .mix.live .mix-stat   { animation: none; opacity: 1; transform: none; }
+}
+
+@media (max-width: 768px) {
+  .mix-stat { left: 4%; bottom: 6%; padding: 10px 12px; }
+  .mix-stat-value { font-size: 22px; }
 }
 
 .mix-phone {
@@ -720,7 +830,17 @@ section {
 }
 
 .mix-phone video,
-.mix-phone img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mix-phone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;   /* rein dekorativ: kein Hover, kein PiP-Button */
+}
+
+.mix-phone video::-webkit-media-controls,
+.mix-phone video::-webkit-media-controls-enclosure,
+.mix-phone video::-webkit-media-controls-panel { display: none !important; }
 
 .mix-card {
   position: absolute;
@@ -1698,10 +1818,36 @@ a.contact-detail-value:hover { color: var(--accent); }
           <div class="mix">
             <span class="mix-badge">Content-Mix</span>
 
+            <div class="mix-graph" aria-hidden="true">
+              <svg viewBox="0 0 600 440" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="graphFade" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#2BFF88" stop-opacity="0.22"/>
+                    <stop offset="100%" stop-color="#2BFF88" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path class="graph-area"
+                      d="M20,410 L110,392 L200,368 L290,318 L380,246 L470,146 L555,54 L555,440 L20,440 Z"/>
+                <path class="graph-line"
+                      d="M20,410 L110,392 L200,368 L290,318 L380,246 L470,146 L555,54"/>
+                <circle class="graph-dot" cx="555" cy="54" r="5"/>
+              </svg>
+            </div>
+
+            <div class="mix-stat">
+              <div class="mix-stat-row">
+                <span class="mix-stat-value" id="reachCounter">0</span>
+                <span class="mix-stat-arrow" aria-hidden="true">&#9650;</span>
+              </div>
+              <div class="mix-stat-label">Erreichte Konten<br>in einem Monat</div>
+            </div>
+
             <div class="mix-phone">
               <video src="/images/champers-reel.mp4"
                      poster="/images/champers-reel-poster.jpg"
                      autoplay muted loop playsinline preload="none"
+                     disablepictureinpicture disableremoteplayback
+                     controlslist="nodownload noplaybackrate noremoteplayback"
                      aria-label="Ausschnitt aus einem Reel f&uuml;r Champers Bad Segeberg"></video>
             </div>
 
@@ -1741,7 +1887,7 @@ a.contact-detail-value:hover { color: var(--accent); }
               <div class="work-detail-block">
                 <div class="work-detail-label">Ergebnis</div>
                 <div class="work-result">
-                  Aufrufzahlen von ca. <span class="accent-num">3.000 auf über 125.000</span> gesteigert.
+                  <span class="accent-num">&Uuml;ber 125.000 erreichte Konten</span> in einem Monat &mdash; ganz &uuml;berwiegend aus dem direkten Umkreis. Also genau die Leute, die auch tats&auml;chlich vorbeikommen k&ouml;nnen.
                 </div>
               </div>
             </div>
@@ -2213,6 +2359,42 @@ if (fan) {
   }, { threshold: 0.35 });
   fanObserver.observe(fan);
 }
+
+// Champers: Graph zeichnen und Reichweite hochzählen, sobald sichtbar
+(() => {
+  const mix = document.querySelector('.mix');
+  const zaehler = document.getElementById('reachCounter');
+  if (!mix || !zaehler) return;
+
+  const ziel = 125000;
+  const reduziert = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const beobachter = new IntersectionObserver((eintraege) => {
+    eintraege.forEach(eintrag => {
+      if (!eintrag.isIntersecting) return;
+      mix.classList.add('live');
+
+      if (reduziert) {
+        zaehler.textContent = ziel.toLocaleString('de-DE');
+      } else {
+        const dauer = 2200;
+        const start = performance.now();
+        const schritt = (jetzt) => {
+          const t = Math.min((jetzt - start) / dauer, 1);
+          // langsam auslaufend, damit die Zahl am Ende "einrastet"
+          const wert = Math.round(ziel * (1 - Math.pow(1 - t, 3)));
+          zaehler.textContent = wert.toLocaleString('de-DE');
+          if (t < 1) requestAnimationFrame(schritt);
+        };
+        requestAnimationFrame(schritt);
+      }
+
+      beobachter.unobserve(eintrag.target);
+    });
+  }, { threshold: 0.3 });
+
+  beobachter.observe(mix);
+})();
 
 // Likes zufällig positionieren, Größe und Symbol nach jedem Durchlauf neu würfeln
 (() => {
