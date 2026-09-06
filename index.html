@@ -608,6 +608,96 @@ section {
   letter-spacing: 0.1em;
 }
 
+/* ---------- Fächer für Social-Media-Grafiken ---------- */
+.fan {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.fan-card {
+  position: absolute;
+  width: 40%;
+  max-width: 190px;
+  aspect-ratio: 9/16;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  background: var(--bg-elevated);
+}
+
+.fan-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Ausgangslage: gestapelt in der Mitte */
+.fan-card:nth-child(1) { transform: rotate(0deg) translateX(0) translateY(0); z-index: 1; }
+.fan-card:nth-child(2) { transform: rotate(0deg) translateX(0) translateY(0); z-index: 3; }
+.fan-card:nth-child(3) { transform: rotate(0deg) translateX(0) translateY(0); z-index: 2; }
+
+/* Aufgefächert, sobald die Sektion sichtbar wird */
+.fan.open .fan-card:nth-child(1) { transform: rotate(-11deg) translateX(-72%) translateY(10px); }
+.fan.open .fan-card:nth-child(2) { transform: rotate(0deg) translateX(0) translateY(-14px) scale(1.06); }
+.fan.open .fan-card:nth-child(3) { transform: rotate(11deg) translateX(72%) translateY(10px); }
+
+/* Beim Hover weiter aufspreizen */
+.work-item:hover .fan.open .fan-card:nth-child(1) { transform: rotate(-15deg) translateX(-88%) translateY(4px); }
+.work-item:hover .fan.open .fan-card:nth-child(2) { transform: rotate(0deg) translateX(0) translateY(-22px) scale(1.1); }
+.work-item:hover .fan.open .fan-card:nth-child(3) { transform: rotate(15deg) translateX(88%) translateY(4px); }
+
+/* ---------- Aufsteigende Likes ---------- */
+.fan-likes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.like {
+  position: absolute;
+  bottom: -40px;
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0;
+  color: var(--accent);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+  animation: floatUp 4.2s ease-in infinite;
+}
+
+@keyframes floatUp {
+  0%   { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
+  12%  { opacity: 1; transform: translateY(-40px) scale(1) rotate(-6deg); }
+  70%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-380px) scale(0.85) rotate(8deg); }
+}
+
+.like:nth-child(1) { left: 16%; animation-delay: 0s;    font-size: 18px; }
+.like:nth-child(2) { left: 34%; animation-delay: 1.1s;  font-size: 24px; }
+.like:nth-child(3) { left: 52%; animation-delay: 2.3s;  font-size: 16px; }
+.like:nth-child(4) { left: 70%; animation-delay: 0.6s;  font-size: 22px; }
+.like:nth-child(5) { left: 84%; animation-delay: 3.1s;  font-size: 18px; }
+.like:nth-child(6) { left: 26%; animation-delay: 3.7s;  font-size: 20px; }
+
+/* Barrierefreiheit: keine Bewegung, wenn der Nutzer das so eingestellt hat */
+@media (prefers-reduced-motion: reduce) {
+  .fan-card { transition: none; }
+  .like { animation: none; opacity: 0; }
+}
+
+@media (max-width: 968px) {
+  .fan { min-height: 340px; }
+  .fan-card { max-width: 150px; }
+  .fan.open .fan-card:nth-child(1) { transform: rotate(-10deg) translateX(-62%) translateY(8px); }
+  .fan.open .fan-card:nth-child(3) { transform: rotate(10deg) translateX(62%) translateY(8px); }
+}
+
 @media (max-width: 968px) {
   .work-item, .work-item.reverse {
     grid-template-columns: 1fr;
@@ -1321,7 +1411,7 @@ a.contact-detail-value:hover { color: var(--accent); }
         </h2>
       </div>
       <p class="section-desc">
-        Drei Projekte aus Design, Frontend und Content — von der Konzeption bis zur Umsetzung.
+        Vier Projekte aus Design, Frontend und Content — von der Konzeption bis zur Umsetzung.
       </p>
     </div>
 
@@ -1448,6 +1538,76 @@ a.contact-detail-value:hover { color: var(--accent); }
             <span class="work-tag">Content Strategy</span>
             <span class="work-tag">Foto / Video</span>
             <span class="work-tag">Instagram</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 4: SV Schackendorf -->
+      <article class="work-item reverse reveal">
+        <div class="work-visual">
+          <div class="fan" id="svsFan">
+            <div class="fan-likes" aria-hidden="true">
+              <span class="like">&#10084;</span>
+              <span class="like">&#10084;</span>
+              <span class="like">&#128077;</span>
+              <span class="like">&#10084;</span>
+              <span class="like">&#128077;</span>
+              <span class="like">&#10084;</span>
+            </div>
+
+            <div class="fan-card">
+              <picture>
+                <source srcset="/images/svs-1.webp" type="image/webp">
+                <img src="/images/svs-1.jpg" alt="Matchday-Grafik SV Schackendorf gegen SV Todesfelde, Halbfinale" width="540" height="960" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="fan-card">
+              <picture>
+                <source srcset="/images/svs-2.webp" type="image/webp">
+                <img src="/images/svs-2.jpg" alt="Matchday-Grafik SV Schackendorf gegen TuS Hartenholm, Viertelfinale" width="540" height="960" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="fan-card">
+              <picture>
+                <source srcset="/images/svs-3.webp" type="image/webp">
+                <img src="/images/svs-3.jpg" alt="Aufstellungs-Grafik SV Schackendorf" width="540" height="960" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-content">
+          <div>
+            <div class="work-meta-top">
+              <span>04 &middot; Grafik &amp; Visual System</span>
+              <span>Freelance &middot; seit 2025</span>
+            </div>
+            <h3 class="work-title">SV Schackendorf</h3>
+            <div class="work-subtitle">Visuelles System f&uuml;r den Spieltag</div>
+
+            <div class="work-details">
+              <div class="work-detail-block">
+                <div class="work-detail-label">Rolle</div>
+                <div class="work-detail-text">Konzeption und Gestaltung der Spieltags-Kommunikation: Matchday-Grafiken, Aufstellungen und Spielplan-Visuals.</div>
+              </div>
+              <div class="work-detail-block">
+                <div class="work-detail-label">Prozess</div>
+                <div class="work-detail-text">Aufbau eines wiederverwendbaren Grafik-Systems auf Basis der Vereinsfarben. Feste Regeln f&uuml;r Typografie, Freisteller und Layout sorgen daf&uuml;r, dass jede Grafik trotz wechselnder Motive sofort dem Verein zuzuordnen ist.</div>
+              </div>
+              <div class="work-detail-block">
+                <div class="work-detail-label">Ergebnis</div>
+                <div class="work-result">
+                  Ein <span class="accent-num">wiedererkennbarer Auftritt</span> f&uuml;r jeden Spieltag &mdash; produzierbar in Minuten statt Stunden.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="work-tags">
+            <span class="work-tag">Adobe Photoshop</span>
+            <span class="work-tag">Visual System</span>
+            <span class="work-tag">Social Media</span>
+            <span class="work-tag">Freistellung</span>
           </div>
         </div>
       </article>
@@ -1826,6 +1986,20 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Fächer aufklappen, sobald er ins Bild scrollt
+const fan = document.getElementById('svsFan');
+if (fan) {
+  const fanObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => fan.classList.add('open'), 220);
+        fanObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.35 });
+  fanObserver.observe(fan);
+}
 
 // Kontaktformular via Web3Forms (ohne Seitenwechsel)
 const contactForm = document.getElementById('contactForm');
