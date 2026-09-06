@@ -1119,6 +1119,34 @@ a.contact-detail-value:hover { color: var(--accent); }
   color: var(--bg);
 }
 
+.form-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-status {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  display: none;
+}
+
+.form-status.visible { display: block; }
+
+.form-status.success {
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 2px solid var(--accent);
+  color: var(--text);
+}
+
+.form-status.error {
+  background: rgba(255, 45, 45, 0.08);
+  border-left: 2px solid var(--accent);
+  color: var(--text-muted);
+}
+
 @media (max-width: 968px) {
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .contact-form { padding: 32px 24px; }
@@ -1268,9 +1296,6 @@ a.contact-detail-value:hover { color: var(--accent); }
           <a href="#work" class="btn btn-primary">
             Portfolio ansehen <span class="arrow">→</span>
           </a>
-          <a href="/cv-nico-clasen.pdf" class="btn btn-secondary" download>
-            CV downloaden ↓
-          </a>
         </div>
       </div>
 
@@ -1301,7 +1326,7 @@ a.contact-detail-value:hover { color: var(--accent); }
         </h2>
       </div>
       <p class="section-desc">
-        Vier Projekte aus Design, Frontend und Content — von der Konzeption bis zur Umsetzung.
+        Drei Projekte aus Design, Frontend und Content — von der Konzeption bis zur Umsetzung.
       </p>
     </div>
 
@@ -1391,51 +1416,15 @@ a.contact-detail-value:hover { color: var(--accent); }
         </div>
       </article>
 
-      <!-- CASE 3: Versicherungsmakler -->
+      <!-- CASE 3: Champers -->
       <article class="work-item reveal">
         <div class="work-visual">
-          <div class="work-visual-label">▢ Screenshot · Web-Anwendung</div>
+          <div class="work-visual-label">▢ Screenshot · Champers Instagram</div>
         </div>
         <div class="work-content">
           <div>
             <div class="work-meta-top">
-              <span>03 · Frontend-Mitentwicklung</span>
-              <span>Freelance · 2025</span>
-            </div>
-            <h3 class="work-title">Versicherungsmakler</h3>
-            <div class="work-subtitle">Kundenspezifische Web-Anwendung</div>
-
-            <div class="work-details">
-              <div class="work-detail-block">
-                <div class="work-detail-label">Rolle</div>
-                <div class="work-detail-text">Frontend-Mitentwicklung an einer Webanwendung für einen Versicherungsmakler.</div>
-              </div>
-              <div class="work-detail-block">
-                <div class="work-detail-label">Prozess</div>
-                <div class="work-detail-text">Umsetzung im Team, Fokus auf UI-Komponenten und Frontend-Logik. <span class="placeholder">[Details folgen]</span></div>
-              </div>
-              <div class="work-detail-block">
-                <div class="work-detail-label">Ergebnis</div>
-                <div class="work-result">Produktive Anwendung im Einsatz.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="work-tags">
-            <span class="work-tag">Frontend</span>
-            <span class="work-tag">JavaScript</span>
-            <span class="work-tag">UI Components</span>
-            <span class="work-tag">Team-Projekt</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- CASE 4: Champers -->
-      <article class="work-item reveal">
-        <div class="work-content">
-          <div>
-            <div class="work-meta-top">
-              <span>04 · Content & Social Media</span>
+              <span>03 · Content &amp; Social Media</span>
               <span>Freelance · seit 02/2025</span>
             </div>
             <h3 class="work-title">Champers Bad Segeberg</h3>
@@ -1465,9 +1454,6 @@ a.contact-detail-value:hover { color: var(--accent); }
             <span class="work-tag">Foto / Video</span>
             <span class="work-tag">Instagram</span>
           </div>
-        </div>
-        <div class="work-visual">
-          <div class="work-visual-label">▢ Screenshot · Champers Instagram</div>
         </div>
       </article>
 
@@ -1710,28 +1696,33 @@ a.contact-detail-value:hover { color: var(--accent); }
         </div>
         <div class="contact-detail">
           <div class="contact-detail-label">LinkedIn</div>
-          <a href="#" class="contact-detail-value">→ Profil ansehen <span class="placeholder" style="font-size: 11px; padding: 2px 6px;">Link folgt</span></a>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-label">CV / Lebenslauf</div>
-          <a href="/cv-nico-clasen.pdf" download class="contact-detail-value">→ PDF downloaden ↓</a>
+          <a href="https://www.linkedin.com/in/nico-clasen/" target="_blank" rel="noopener" class="contact-detail-value">→ linkedin.com/in/nico-clasen</a>
         </div>
       </div>
 
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Formular-Backend muss noch eingerichtet werden (Formspree / Web3Forms)');">
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+
+        <!-- Web3Forms Access Key: bei web3forms.com kostenlos anfordern und hier einsetzen -->
+        <input type="hidden" name="access_key" value="9ab78184-2407-4a85-b0bb-a5e3a6352696">
+        <input type="hidden" name="subject" value="Neue Anfrage über clnmedia.de">
+        <input type="hidden" name="from_name" value="clnmedia.de Kontaktformular">
+
+        <!-- Honeypot gegen Spam-Bots: für Menschen unsichtbar -->
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none;" tabindex="-1" autocomplete="off">
+
         <div class="form-group">
-          <label class="form-label">Name *</label>
-          <input type="text" class="form-input" required placeholder="Dein Name">
+          <label class="form-label" for="cf-name">Name *</label>
+          <input type="text" id="cf-name" name="name" class="form-input" required placeholder="Dein Name" autocomplete="name">
         </div>
 
         <div class="form-group">
-          <label class="form-label">E-Mail *</label>
-          <input type="email" class="form-input" required placeholder="deine@mail.de">
+          <label class="form-label" for="cf-email">E-Mail *</label>
+          <input type="email" id="cf-email" name="email" class="form-input" required placeholder="deine@mail.de" autocomplete="email">
         </div>
 
         <div class="form-group">
-          <label class="form-label">Anlass</label>
-          <select class="form-select">
+          <label class="form-label" for="cf-anlass">Anlass</label>
+          <select id="cf-anlass" name="anlass" class="form-select">
             <option>Bewerbungs-Anfrage / Job-Angebot</option>
             <option>Freelance-Projekt</option>
             <option>Kollaboration</option>
@@ -1740,16 +1731,18 @@ a.contact-detail-value:hover { color: var(--accent); }
         </div>
 
         <div class="form-group">
-          <label class="form-label">Deine Nachricht *</label>
-          <textarea class="form-textarea" required placeholder="Erzähl kurz, worum es geht."></textarea>
+          <label class="form-label" for="cf-message">Deine Nachricht *</label>
+          <textarea id="cf-message" name="message" class="form-textarea" required placeholder="Erzähl kurz, worum es geht."></textarea>
         </div>
 
         <div class="form-checkbox">
-          <input type="checkbox" required id="dsgvo">
+          <input type="checkbox" required id="dsgvo" name="datenschutz_akzeptiert" value="ja">
           <label for="dsgvo">Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.</label>
         </div>
 
-        <button type="submit" class="form-submit">Nachricht senden →</button>
+        <button type="submit" class="form-submit" id="formSubmit">Nachricht senden →</button>
+
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
       </form>
     </div>
   </div>
@@ -1785,8 +1778,7 @@ a.contact-detail-value:hover { color: var(--accent); }
         <ul>
           <li><a href="mailto:hallo@clnmedia.de">E-Mail</a></li>
           <li><a href="tel:+4917392731700">Telefon</a></li>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="/cv-nico-clasen.pdf" download>CV / PDF</a></li>
+          <li><a href="https://www.linkedin.com/in/nico-clasen/" target="_blank" rel="noopener">LinkedIn</a></li>
         </ul>
       </div>
 
@@ -1834,6 +1826,44 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Kontaktformular via Web3Forms (ohne Seitenwechsel)
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  const statusBox = document.getElementById('formStatus');
+  const submitBtn = document.getElementById('formSubmit');
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird gesendet …';
+    statusBox.className = 'form-status';
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm)
+      });
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        statusBox.textContent = 'Danke, deine Nachricht ist angekommen. Ich melde mich in der Regel innerhalb von 24 Stunden.';
+        statusBox.className = 'form-status success visible';
+        contactForm.reset();
+      } else {
+        throw new Error(result.message || 'Unbekannter Fehler');
+      }
+    } catch (err) {
+      statusBox.innerHTML = 'Das hat leider nicht geklappt. Schreib mir gern direkt an <a href="mailto:hallo@clnmedia.de" style="color: var(--accent);">hallo@clnmedia.de</a>.';
+      statusBox.className = 'form-status error visible';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Nachricht senden →';
+    }
+  });
+}
 
 </script>
 
