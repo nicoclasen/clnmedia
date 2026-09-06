@@ -819,7 +819,7 @@ section {
   z-index: 3;
   width: 34%;
   max-width: 176px;
-  transform: translateX(-22%);
+  transform: translateX(-46%);
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -912,7 +912,7 @@ section {
   transform: rotate(-4deg);
 }
 
-.work-item:hover .mix-reel { transform: translateX(-26%) translateY(-8px); }
+.work-item:hover .mix-reel { transform: translateX(-50%) translateY(-8px); }
 .work-item:hover .mix-menu  { transform: rotate(7deg) translateY(-14px); }
 .work-item:hover .mix-promo { transform: rotate(-6deg) translateX(4%) translateY(6px); }
 
@@ -1880,15 +1880,16 @@ a.contact-detail-value:hover { color: var(--accent); }
                 <span class="mix-stat-value" id="reachCounter">0</span>
                 <span class="mix-stat-arrow" aria-hidden="true">&#9650;</span>
               </div>
-              <div class="mix-stat-label">Erreichte Konten<br>in einem Monat</div>
+              <div class="mix-stat-label">Erreichte Konten / Monat<br>Instagram &amp; TikTok</div>
             </div>
 
             <div class="mix-reel">
               <div class="mix-pops" aria-hidden="true">
-                <span class="pop">&#10084;</span>
-                <span class="pop">&#128077;</span>
-                <span class="pop">&#10084;</span>
-                <span class="pop">&#128293;</span>
+                <span class="pop">&#127828;</span>
+                <span class="pop">&#128525;</span>
+                <span class="pop">&#127839;</span>
+                <span class="pop">&#129293;</span>
+                <span class="pop">&#129321;</span>
               </div>
 
               <div class="mix-phone">
@@ -1937,7 +1938,7 @@ a.contact-detail-value:hover { color: var(--accent); }
               <div class="work-detail-block">
                 <div class="work-detail-label">Ergebnis</div>
                 <div class="work-result">
-                  <span class="accent-num">&Uuml;ber 125.000 erreichte Konten</span> in einem Monat &mdash; ganz &uuml;berwiegend aus dem direkten Umkreis. Also genau die Leute, die auch tats&auml;chlich vorbeikommen k&ouml;nnen.
+                  <span class="accent-num">&Uuml;ber 200.000 erreichte Konten</span> in einem Monat &uuml;ber Instagram und TikTok &mdash; ein Gro&szlig;teil davon aus dem direkten Umkreis. Also genau die Leute, die auch tats&auml;chlich vorbeikommen k&ouml;nnen.
                 </div>
               </div>
             </div>
@@ -1950,6 +1951,7 @@ a.contact-detail-value:hover { color: var(--accent); }
             <span class="work-tag">Reels</span>
             <span class="work-tag">Print &amp; Speisekarte</span>
             <span class="work-tag">Instagram</span>
+            <span class="work-tag">TikTok</span>
           </div>
         </div>
       </article>
@@ -2416,7 +2418,19 @@ if (fan) {
   if (!pops.length) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const symbole = ['\u2764', '\u2764', '\u2764', '\u2764', '\uD83D\uDC4D', '\uD83D\uDD25'];
+  // gemischte Reaktionen: Food, Smileys, Herzen rot und weiss, Daumen, Flamme
+  const symbole = [
+    '\uD83C\uDF54',            // Burger
+    '\uD83C\uDF54',            // Burger
+    '\uD83C\uDF5F',            // Pommes
+    '\uD83C\uDF5F',            // Pommes
+    '\uD83D\uDE0D',            // Smiley mit Herzaugen
+    '\uD83E\uDD29',            // Smiley mit Sternaugen
+    '\u2764',                   // rotes Herz
+    '\uD83E\uDD0D',            // weisses Herz
+    '\uD83D\uDC4D',            // Daumen
+    '\uD83D\uDD25'             // Flamme
+  ];
   const zufall = (min, max) => Math.random() * (max - min) + min;
   const mobil = () => window.innerWidth < 968;
 
@@ -2442,7 +2456,7 @@ if (fan) {
   const zaehler = document.getElementById('reachCounter');
   if (!mix || !zaehler) return;
 
-  const ziel = 125000;
+  const ziel = 200000;
   const reduziert = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const beobachter = new IntersectionObserver((eintraege) => {
