@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datenschutzerklärung — Nico Clasen / CLN Media</title>
+<meta name="description" content="Datenschutzerklärung von Nico Clasen / CLN Media. Informationen zur Verarbeitung personenbezogener Daten nach DSGVO.">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&f[]=cabinet-grotesk@400,500,700,800,900&f[]=instrument-serif@400,400i&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0A0A0B;
+  --bg-card: #111113;
+  --bg-elevated: #16161A;
+  --text: #FAFAFA;
+  --text-dim: #6B6B70;
+  --text-muted: #9A9AA0;
+  --accent: #FF2D2D;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.2);
+
+  --font-display: 'Cabinet Grotesk', sans-serif;
+  --font-editorial: 'Instrument Serif', serif;
+  --font-body: 'General Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.5;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--text);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 0.3s, height 0.3s, background 0.3s;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+}
+
+.cursor.hover {
+  width: 56px;
+  height: 56px;
+  background: var(--accent);
+  mix-blend-mode: normal;
+}
+
+@media (max-width: 768px), (hover: none) {
+  body { cursor: auto; }
+  .cursor { display: none; }
+}
+
+/* ==================== NAV ==================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  mix-blend-mode: difference;
+  transition: padding 0.3s;
+}
+
+.nav.scrolled { padding: 16px 32px; }
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.nav-logo .dot { color: var(--accent); mix-blend-mode: normal; }
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  color: var(--text);
+  position: relative;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--text);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  padding: 10px 20px;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.nav-cta:hover { transform: translateY(-2px); background: var(--accent); color: var(--text); }
+
+@media (max-width: 968px) { .nav-links { display: none; } }
+
+/* ==================== LEGAL PAGE ==================== */
+.legal-page {
+  min-height: 100vh;
+  padding: 140px 32px 80px;
+}
+
+.legal-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.legal-back {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+  transition: color 0.2s;
+}
+
+.legal-back:hover { color: var(--accent); }
+
+.legal-page h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(40px, 6vw, 72px);
+  letter-spacing: -0.04em;
+  margin-bottom: 24px;
+  line-height: 1;
+}
+
+.legal-lead {
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 40px;
+  max-width: 720px;
+}
+
+.legal-page h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  margin-top: 48px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.legal-page h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.legal-page p, .legal-page li {
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.legal-page ul { padding-left: 20px; margin-bottom: 16px; }
+
+.legal-page strong { color: var(--text); font-weight: 500; }
+
+.legal-page a { color: var(--accent); text-decoration: none; }
+.legal-page a:hover { text-decoration: underline; }
+
+/* ==================== FOOTER ==================== */
+.footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 60px 0 32px;
+  margin-top: 80px;
+}
+
+.footer-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 32px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="cursor"></div>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav">
+  <a href="/" class="nav-logo">cln<span class="dot">.</span></a>
+  <ul class="nav-links">
+    <li><a href="/#work">Arbeiten</a></li>
+    <li><a href="/#services">Leistungen</a></li>
+    <li><a href="/#about">Über</a></li>
+    <li><a href="/#skills">Skills</a></li>
+  </ul>
+  <a href="/#contact" class="nav-cta">Kontakt</a>
+</nav>
+
+<!-- ==================== DATENSCHUTZ ==================== -->
+<div class="legal-page">
+  <div class="legal-container">
+    <a href="/" class="legal-back">← Zurück zur Startseite</a>
+    <h1>Datenschutzerklärung</h1>
+
+    <p class="legal-lead">
+      Der Schutz deiner personenbezogenen Daten ist mir wichtig. Diese Datenschutzerklärung informiert dich darüber, welche Daten beim Besuch dieser Website verarbeitet werden, wie das geschieht und welche Rechte du hast.
+    </p>
+
+    <h2>1. Verantwortlicher</h2>
+    <p>
+      Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze ist:
+    </p>
+    <p>
+      <strong>Nico Clasen</strong><br>
+      CLN Media<br>
+      Siedlungsstr. 11<br>
+      23826 Todesfelde<br>
+      Deutschland<br><br>
+      Telefon: 0173 92 73 170<br>
+      E-Mail: <a href="mailto:hallo@clnmedia.de">hallo@clnmedia.de</a>
+    </p>
+
+    <h2>2. Allgemeine Hinweise</h2>
+
+    <h3>Erfassung personenbezogener Daten</h3>
+    <p>
+      Personenbezogene Daten sind alle Daten, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen. Dazu gehören z. B. Name, Anschrift, E-Mail-Adresse, IP-Adresse oder Nutzerverhalten. Ich erhebe personenbezogene Daten nur, wenn du sie mir aktiv mitteilst (z. B. per E-Mail oder Kontaktformular) oder wenn deren Erhebung technisch für die Bereitstellung der Website erforderlich ist.
+    </p>
+
+    <h3>Rechtsgrundlagen</h3>
+    <p>
+      Die Verarbeitung personenbezogener Daten erfolgt auf Grundlage folgender Rechtsgrundlagen:
+    </p>
+    <ul>
+      <li><strong>Art. 6 Abs. 1 lit. a DSGVO</strong> – Einwilligung</li>
+      <li><strong>Art. 6 Abs. 1 lit. b DSGVO</strong> – Vertragserfüllung oder vorvertragliche Maßnahmen</li>
+      <li><strong>Art. 6 Abs. 1 lit. f DSGVO</strong> – Berechtigtes Interesse (z. B. am sicheren Betrieb der Website)</li>
+    </ul>
+
+    <h2>3. Hosting</h2>
+
+    <h3>Vercel</h3>
+    <p>
+      Diese Website wird gehostet bei der Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA. Beim Aufruf der Website werden technische Daten wie IP-Adresse, aufgerufene Seite, verwendeter Browser sowie Zeitpunkt des Zugriffs automatisch verarbeitet.
+    </p>
+    <p>
+      <strong>Drittlandübermittlung:</strong> Vercel ist ein US-amerikanisches Unternehmen. Es kann daher zu einer Übermittlung personenbezogener Daten in die USA kommen. Für die USA hat die EU-Kommission mit dem EU-US Data Privacy Framework (Angemessenheitsbeschluss vom 10. Juli 2023) ein angemessenes Datenschutzniveau für zertifizierte Unternehmen festgestellt. Vercel Inc. ist unter diesem Rahmen zertifiziert.
+    </p>
+    <p>
+      Weitere Informationen: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">https://vercel.com/legal/privacy-policy</a>
+    </p>
+    <p>
+      Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der zuverlässigen Bereitstellung der Website).
+    </p>
+
+    <h2>4. Server-Logfiles</h2>
+    <p>
+      Der Hosting-Anbieter Vercel erhebt und speichert automatisch Informationen in Server-Logfiles, die dein Browser an den Server übermittelt. Dazu gehören:
+    </p>
+    <ul>
+      <li>IP-Adresse (in gekürzter oder pseudonymisierter Form)</li>
+      <li>Datum und Uhrzeit des Zugriffs</li>
+      <li>URL der aufgerufenen Seite</li>
+      <li>Browsertyp und -version</li>
+      <li>Verwendetes Betriebssystem</li>
+      <li>Referrer-URL (die zuvor besuchte Seite)</li>
+    </ul>
+    <p>
+      Diese Daten dienen der technischen Bereitstellung, Sicherheit und Fehleranalyse. Sie werden nicht mit anderen Datenquellen zusammengeführt. Die Speicherung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse).
+    </p>
+
+    <h2>5. Kontaktaufnahme</h2>
+
+    <h3>Anfrage per E-Mail</h3>
+    <p>
+      Wenn du mich per E-Mail kontaktierst (z. B. an hallo@clnmedia.de), werden deine Angaben inklusive der von dir angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei mir gespeichert. Diese Daten gebe ich nicht ohne deine Einwilligung weiter.
+    </p>
+    <p>
+      Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen bzw. Vertragserfüllung) sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung deiner Anfrage).
+    </p>
+
+    <h3>Anfrage per Telefon</h3>
+    <p>
+      Wenn du mich telefonisch kontaktierst, werden die von dir mitgeteilten Informationen zur Bearbeitung deines Anliegens verarbeitet und ggf. in Notizen festgehalten.
+    </p>
+
+    <h3>Kontaktformular</h3>
+    <p>
+      Aktuell wird auf dieser Website kein aktives Kontaktformular betrieben. Sobald ein Formular integriert wird, ergänze ich diese Datenschutzerklärung entsprechend.
+    </p>
+
+    <h2>6. E-Mail-Provider (Mailbox.org)</h2>
+    <p>
+      Meine geschäftliche E-Mail-Adresse wird über den Anbieter Mailbox.org (Heinlein Support GmbH, Schwedter Str. 8/9a, 10119 Berlin, Deutschland) betrieben. Der Anbieter verarbeitet E-Mail-Daten ausschließlich auf Servern innerhalb der Europäischen Union.
+    </p>
+    <p>
+      Weitere Informationen: <a href="https://mailbox.org/de/datenschutz" target="_blank" rel="noopener">https://mailbox.org/de/datenschutz</a>
+    </p>
+
+    <h2>7. Externe Schriftarten (Fontshare & Google Fonts)</h2>
+    <p>
+      Diese Website bindet Schriftarten (Fonts) von externen Anbietern ein, um eine einheitliche Darstellung sicherzustellen. Beim Aufruf der Website werden die entsprechenden Font-Dateien von den Servern der Anbieter geladen. Dabei kann deine IP-Adresse an diese Anbieter übertragen werden.
+    </p>
+    <p>
+      <strong>Fontshare</strong> (Indian Type Foundry, Ahmedabad, Indien): Anbieter der Schriftarten „Cabinet Grotesk", „General Sans" und „Instrument Serif". Weitere Informationen: <a href="https://www.fontshare.com/privacy" target="_blank" rel="noopener">https://www.fontshare.com/privacy</a>
+    </p>
+    <p>
+      <strong>Google Fonts</strong> (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland): Anbieter der Schriftart „JetBrains Mono". Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>
+    </p>
+    <p>
+      Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer einheitlichen, professionellen Darstellung der Website).
+    </p>
+
+    <h2>8. SSL-Verschlüsselung</h2>
+    <p>
+      Diese Website nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL-/TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennst du daran, dass die Adresszeile des Browsers mit „https://" beginnt und ein Schloss-Symbol angezeigt wird.
+    </p>
+
+    <h2>9. Cookies</h2>
+    <p>
+      Diese Website verwendet keine Cookies zu Tracking- oder Analysezwecken. Es werden auch keine Cookies zur Personalisierung oder Werbung gesetzt.
+    </p>
+
+    <h2>10. Tracking und Analyse-Tools</h2>
+    <p>
+      Diese Website nutzt aktuell keine Analyse-Tools wie Google Analytics, Matomo oder ähnliches. Es findet kein Tracking des Nutzerverhaltens statt.
+    </p>
+
+    <h2>11. Speicherdauer</h2>
+    <p>
+      Personenbezogene Daten werden nur so lange gespeichert, wie es für die jeweiligen Zwecke erforderlich ist oder gesetzliche Aufbewahrungsfristen dies verlangen. Nach Wegfall des Zwecks werden die Daten routinemäßig gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen (z. B. handels- oder steuerrechtliche Aufbewahrungsfristen von 6 bzw. 10 Jahren).
+    </p>
+
+    <h2>12. Deine Rechte als betroffene Person</h2>
+    <p>
+      Du hast jederzeit das Recht auf:
+    </p>
+    <ul>
+      <li><strong>Auskunft</strong> über deine gespeicherten personenbezogenen Daten (Art. 15 DSGVO)</li>
+      <li><strong>Berichtigung</strong> unrichtiger oder unvollständiger Daten (Art. 16 DSGVO)</li>
+      <li><strong>Löschung</strong> deiner Daten, sofern keine Aufbewahrungspflichten entgegenstehen (Art. 17 DSGVO)</li>
+      <li><strong>Einschränkung der Verarbeitung</strong> (Art. 18 DSGVO)</li>
+      <li><strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO)</li>
+      <li><strong>Widerspruch</strong> gegen die Verarbeitung (Art. 21 DSGVO)</li>
+      <li><strong>Widerruf</strong> einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)</li>
+    </ul>
+    <p>
+      Zur Ausübung deiner Rechte reicht eine formlose Mitteilung an die oben angegebenen Kontaktdaten.
+    </p>
+
+    <h2>13. Beschwerderecht bei der Aufsichtsbehörde</h2>
+    <p>
+      Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung deiner personenbezogenen Daten zu beschweren. Zuständig für mich ist:
+    </p>
+    <p>
+      Unabhängiges Landeszentrum für Datenschutz Schleswig-Holstein<br>
+      Holstenstraße 98, 24103 Kiel<br>
+      Telefon: 0431 988-1200<br>
+      E-Mail: mail@datenschutzzentrum.de<br>
+      <a href="https://www.datenschutzzentrum.de" target="_blank" rel="noopener">www.datenschutzzentrum.de</a>
+    </p>
+
+    <h2>14. Widerspruch gegen Werbe-Mails</h2>
+    <p>
+      Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit widersprochen. Ich behalte mir ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.
+    </p>
+
+    <h2>15. Änderungen dieser Datenschutzerklärung</h2>
+    <p>
+      Ich behalte mir vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen meiner Leistungen abzubilden. Für deinen erneuten Besuch gilt dann die neue Datenschutzerklärung.
+    </p>
+
+    <p style="margin-top: 40px; font-size: 13px; color: var(--text-dim);">
+      Stand: September 2026
+    </p>
+  </div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-bottom">
+      <div>© 2026 CLN Media · Nico Clasen</div>
+      <ul class="footer-links">
+        <li><a href="/">Startseite</a></li>
+        <li><a href="/impressum">Impressum</a></li>
+        <li><a href="/datenschutz">Datenschutz</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.querySelector('.cursor');
+document.addEventListener('mousemove', (e) => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+
+// Nav scroll state
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+</script>
+
+</body>
+</html>
