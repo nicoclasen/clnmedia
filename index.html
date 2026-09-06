@@ -637,19 +637,20 @@ section {
 .fan-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* Ausgangslage: gestapelt in der Mitte */
-.fan-card:nth-child(1) { transform: rotate(0deg) translateX(0) translateY(0); z-index: 1; }
-.fan-card:nth-child(2) { transform: rotate(0deg) translateX(0) translateY(0); z-index: 3; }
-.fan-card:nth-child(3) { transform: rotate(0deg) translateX(0) translateY(0); z-index: 2; }
+.fan-card { transform: rotate(0deg) translateX(0) translateY(0); }
+.fan-left   { z-index: 2; }
+.fan-center { z-index: 4; }
+.fan-right  { z-index: 3; }
 
 /* Aufgefächert, sobald die Sektion sichtbar wird */
-.fan.open .fan-card:nth-child(1) { transform: rotate(-11deg) translateX(-72%) translateY(10px); }
-.fan.open .fan-card:nth-child(2) { transform: rotate(0deg) translateX(0) translateY(-14px) scale(1.06); }
-.fan.open .fan-card:nth-child(3) { transform: rotate(11deg) translateX(72%) translateY(10px); }
+.fan.open .fan-left   { transform: rotate(-12deg) translateX(-78%) translateY(10px); }
+.fan.open .fan-center { transform: rotate(0deg) translateX(0) translateY(-14px) scale(1.06); }
+.fan.open .fan-right  { transform: rotate(12deg) translateX(78%) translateY(10px); }
 
 /* Beim Hover weiter aufspreizen */
-.work-item:hover .fan.open .fan-card:nth-child(1) { transform: rotate(-15deg) translateX(-88%) translateY(4px); }
-.work-item:hover .fan.open .fan-card:nth-child(2) { transform: rotate(0deg) translateX(0) translateY(-22px) scale(1.1); }
-.work-item:hover .fan.open .fan-card:nth-child(3) { transform: rotate(15deg) translateX(88%) translateY(4px); }
+.work-item:hover .fan.open .fan-left   { transform: rotate(-16deg) translateX(-94%) translateY(4px); }
+.work-item:hover .fan.open .fan-center { transform: rotate(0deg) translateX(0) translateY(-22px) scale(1.1); }
+.work-item:hover .fan.open .fan-right  { transform: rotate(16deg) translateX(94%) translateY(4px); }
 
 /* ---------- Aufsteigende Likes ---------- */
 .fan-likes {
@@ -657,33 +658,29 @@ section {
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  z-index: 5;
+  z-index: 0;          /* liegt hinter den Karten */
 }
 
 .like {
   position: absolute;
-  bottom: -40px;
-  font-size: 20px;
+  bottom: -110px;
+  font-size: 72px;
   line-height: 1;
   opacity: 0;
   color: var(--accent);
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
-  animation: floatUp 4.2s ease-in infinite;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
+  animation: floatUp 5.4s ease-in infinite;
 }
 
 @keyframes floatUp {
-  0%   { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
-  12%  { opacity: 1; transform: translateY(-40px) scale(1) rotate(-6deg); }
-  70%  { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-380px) scale(0.85) rotate(8deg); }
+  0%   { opacity: 0; transform: translateY(0) scale(0.45) rotate(0deg); }
+  15%  { opacity: 1; transform: translateY(-90px) scale(1) rotate(-7deg); }
+  72%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-560px) scale(0.95) rotate(9deg); }
 }
 
-.like:nth-child(1) { left: 16%; animation-delay: 0s;    font-size: 18px; }
-.like:nth-child(2) { left: 34%; animation-delay: 1.1s;  font-size: 24px; }
-.like:nth-child(3) { left: 52%; animation-delay: 2.3s;  font-size: 16px; }
-.like:nth-child(4) { left: 70%; animation-delay: 0.6s;  font-size: 22px; }
-.like:nth-child(5) { left: 84%; animation-delay: 3.1s;  font-size: 18px; }
-.like:nth-child(6) { left: 26%; animation-delay: 3.7s;  font-size: 20px; }
+/* Position, Groesse und Symbol werden per JS zufaellig gesetzt
+   und nach jedem Durchlauf neu gewuerfelt */
 
 /* Barrierefreiheit: keine Bewegung, wenn der Nutzer das so eingestellt hat */
 @media (prefers-reduced-motion: reduce) {
@@ -694,8 +691,8 @@ section {
 @media (max-width: 968px) {
   .fan { min-height: 340px; }
   .fan-card { max-width: 150px; }
-  .fan.open .fan-card:nth-child(1) { transform: rotate(-10deg) translateX(-62%) translateY(8px); }
-  .fan.open .fan-card:nth-child(3) { transform: rotate(10deg) translateX(62%) translateY(8px); }
+  .fan.open .fan-left  { transform: rotate(-11deg) translateX(-66%) translateY(8px); }
+  .fan.open .fan-right { transform: rotate(11deg) translateX(66%) translateY(8px); }
 }
 
 @media (max-width: 968px) {
@@ -1548,26 +1545,23 @@ a.contact-detail-value:hover { color: var(--accent); }
           <div class="fan" id="svsFan">
             <div class="fan-likes" aria-hidden="true">
               <span class="like">&#10084;</span>
-              <span class="like">&#10084;</span>
-              <span class="like">&#128077;</span>
-              <span class="like">&#10084;</span>
               <span class="like">&#128077;</span>
               <span class="like">&#10084;</span>
             </div>
 
-            <div class="fan-card">
+            <div class="fan-card fan-left">
               <picture>
                 <source srcset="/images/svs-1.webp" type="image/webp">
                 <img src="/images/svs-1.jpg" alt="Matchday-Grafik SV Schackendorf gegen SV Todesfelde, Halbfinale" width="540" height="960" loading="lazy" decoding="async">
               </picture>
             </div>
-            <div class="fan-card">
+            <div class="fan-card fan-center">
               <picture>
                 <source srcset="/images/svs-2.webp" type="image/webp">
                 <img src="/images/svs-2.jpg" alt="Matchday-Grafik SV Schackendorf gegen TuS Hartenholm, Viertelfinale" width="540" height="960" loading="lazy" decoding="async">
               </picture>
             </div>
-            <div class="fan-card">
+            <div class="fan-card fan-right">
               <picture>
                 <source srcset="/images/svs-3.webp" type="image/webp">
                 <img src="/images/svs-3.jpg" alt="Aufstellungs-Grafik SV Schackendorf" width="540" height="960" loading="lazy" decoding="async">
@@ -2000,6 +1994,31 @@ if (fan) {
   }, { threshold: 0.35 });
   fanObserver.observe(fan);
 }
+
+// Likes zufällig positionieren, Größe und Symbol nach jedem Durchlauf neu würfeln
+(() => {
+  const likes = document.querySelectorAll('.fan-likes .like');
+  if (!likes.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Herz haeufig, Daumen und Flamme jeweils selten
+  const symbole = ['\u2764', '\u2764', '\u2764', '\u2764', '\u2764', '\u2764', '\uD83D\uDC4D', '\uD83D\uDD25'];
+  const zufall = (min, max) => Math.random() * (max - min) + min;
+
+  const wuerfeln = (el) => {
+    el.style.left = zufall(2, 86) + '%';
+    el.style.fontSize = Math.round(zufall(52, 88) * (window.innerWidth < 968 ? 0.6 : 1)) + 'px';
+    el.textContent = symbole[Math.floor(Math.random() * symbole.length)];
+  };
+
+  likes.forEach((el, i) => {
+    wuerfeln(el);
+    el.style.animationDuration = zufall(4.6, 6.4).toFixed(2) + 's';
+    el.style.animationDelay = (i * zufall(1.2, 2.2)).toFixed(2) + 's';
+    // Nach jedem Durchlauf neue Position und neues Symbol
+    el.addEventListener('animationiteration', () => wuerfeln(el));
+  });
+})();
 
 // Kontaktformular via Web3Forms (ohne Seitenwechsel)
 const contactForm = document.getElementById('contactForm');
