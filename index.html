@@ -813,20 +813,61 @@ section {
   .mix-stat-value { font-size: 22px; }
 }
 
-.mix-phone {
+/* Wrapper: haelt Handy und aufsteigende Icons zusammen */
+.mix-reel {
   position: relative;
   z-index: 3;
   width: 34%;
   max-width: 176px;
+  transform: translateX(-22%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mix-phone {
+  position: relative;
+  z-index: 1;
+  width: 100%;
   aspect-ratio: 9/16;
   border-radius: 20px;
   overflow: hidden;
   border: 4px solid #16161a;
   outline: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 24px 56px rgba(0, 0, 0, 0.7);
-  transform: translateX(-22%);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   background: #000;
+}
+
+/* Icons steigen hinter dem Handy auf und driften seitlich weg */
+.mix-pops {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  width: 0;
+  height: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.pop {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-size: 60px;
+  line-height: 1;
+  opacity: 0;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.6));
+  animation: popRise 5.6s ease-out infinite;
+  --dx: 0px;
+}
+
+@keyframes popRise {
+  0%   { opacity: 0; transform: translate(-50%, 0) scale(0.4) rotate(0deg); }
+  14%  { opacity: 1; transform: translate(calc(-50% + var(--dx) * 0.18), -70px) scale(1) rotate(-5deg); }
+  72%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), -360px) scale(0.9) rotate(7deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pop { animation: none; opacity: 0; }
 }
 
 .mix-phone video,
@@ -871,7 +912,7 @@ section {
   transform: rotate(-4deg);
 }
 
-.work-item:hover .mix-phone { transform: translateX(-26%) translateY(-8px); }
+.work-item:hover .mix-reel { transform: translateX(-26%) translateY(-8px); }
 .work-item:hover .mix-menu  { transform: rotate(7deg) translateY(-14px); }
 .work-item:hover .mix-promo { transform: rotate(-6deg) translateX(4%) translateY(6px); }
 
@@ -893,7 +934,7 @@ section {
 
 @media (max-width: 968px) {
   .mix { min-height: 340px; }
-  .mix-phone { max-width: 132px; }
+  .mix-reel { max-width: 132px; }
   .mix-menu  { max-width: 104px; }
   .mix-promo { max-width: 116px; }
 }
@@ -1827,10 +1868,10 @@ a.contact-detail-value:hover { color: var(--accent); }
                   </linearGradient>
                 </defs>
                 <path class="graph-area"
-                      d="M20,410 L110,392 L200,368 L290,318 L380,246 L470,146 L555,54 L555,440 L20,440 Z"/>
+                      d="M18,416 L60,401 L102,408 L144,383 L186,366 L228,374 L270,346 L312,326 L354,334 L396,298 L438,272 L480,280 L522,238 L564,198 L582,166 L582,440 L18,440 Z"/>
                 <path class="graph-line"
-                      d="M20,410 L110,392 L200,368 L290,318 L380,246 L470,146 L555,54"/>
-                <circle class="graph-dot" cx="555" cy="54" r="5"/>
+                      d="M18,416 L60,401 L102,408 L144,383 L186,366 L228,374 L270,346 L312,326 L354,334 L396,298 L438,272 L480,280 L522,238 L564,198 L582,166"/>
+                <circle class="graph-dot" cx="582" cy="166" r="5"/>
               </svg>
             </div>
 
@@ -1842,13 +1883,22 @@ a.contact-detail-value:hover { color: var(--accent); }
               <div class="mix-stat-label">Erreichte Konten<br>in einem Monat</div>
             </div>
 
-            <div class="mix-phone">
+            <div class="mix-reel">
+              <div class="mix-pops" aria-hidden="true">
+                <span class="pop">&#10084;</span>
+                <span class="pop">&#128077;</span>
+                <span class="pop">&#10084;</span>
+                <span class="pop">&#128293;</span>
+              </div>
+
+              <div class="mix-phone">
               <video src="/images/champers-reel.mp4"
                      poster="/images/champers-reel-poster.jpg"
                      autoplay muted loop playsinline preload="none"
                      disablepictureinpicture disableremoteplayback
                      controlslist="nodownload noplaybackrate noremoteplayback"
                      aria-label="Ausschnitt aus einem Reel f&uuml;r Champers Bad Segeberg"></video>
+              </div>
             </div>
 
             <div class="mix-card mix-menu">
@@ -2359,6 +2409,32 @@ if (fan) {
   }, { threshold: 0.35 });
   fanObserver.observe(fan);
 }
+
+// Champers: Icons hinter dem Reel zufällig aufsteigen lassen
+(() => {
+  const pops = document.querySelectorAll('.mix-pops .pop');
+  if (!pops.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const symbole = ['\u2764', '\u2764', '\u2764', '\u2764', '\uD83D\uDC4D', '\uD83D\uDD25'];
+  const zufall = (min, max) => Math.random() * (max - min) + min;
+  const mobil = () => window.innerWidth < 968;
+
+  const wuerfeln = (el) => {
+    // seitliche Drift: mal nach links, mal nach rechts, selten geradeaus
+    const weite = mobil() ? 70 : 130;
+    el.style.setProperty('--dx', Math.round(zufall(-weite, weite)) + 'px');
+    el.style.fontSize = Math.round(zufall(46, 78) * (mobil() ? 0.62 : 1)) + 'px';
+    el.textContent = symbole[Math.floor(Math.random() * symbole.length)];
+  };
+
+  pops.forEach((el, i) => {
+    wuerfeln(el);
+    el.style.animationDuration = zufall(4.8, 6.6).toFixed(2) + 's';
+    el.style.animationDelay = (i * zufall(1.0, 1.8)).toFixed(2) + 's';
+    el.addEventListener('animationiteration', () => wuerfeln(el));
+  });
+})();
 
 // Champers: Graph zeichnen und Reichweite hochzählen, sobald sichtbar
 (() => {
