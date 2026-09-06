@@ -944,7 +944,7 @@ section {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 420px;
+  min-height: 560px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -953,8 +953,8 @@ section {
 
 .fan-card {
   position: absolute;
-  width: 44%;
-  max-width: 215px;
+  width: 46%;
+  max-width: 240px;
   aspect-ratio: 9/16;
   border-radius: 10px;
   overflow: hidden;
@@ -975,40 +975,43 @@ section {
 .fan-right  { z-index: 3; }
 
 /* Aufgefächert, sobald die Sektion sichtbar wird */
-.fan.open .fan-left   { transform: rotate(-12deg) translateX(-78%) translateY(10px); }
-.fan.open .fan-center { transform: rotate(0deg) translateX(0) translateY(-14px) scale(1.06); }
-.fan.open .fan-right  { transform: rotate(12deg) translateX(78%) translateY(10px); }
+.fan.open .fan-left   { transform: rotate(-12deg) translateX(-78%) translateY(58px); }
+.fan.open .fan-center { transform: rotate(0deg) translateX(0) translateY(34px) scale(1.06); }
+.fan.open .fan-right  { transform: rotate(12deg) translateX(78%) translateY(58px); }
 
 /* Beim Hover weiter aufspreizen */
-.work-item:hover .fan.open .fan-left   { transform: rotate(-16deg) translateX(-94%) translateY(4px); }
-.work-item:hover .fan.open .fan-center { transform: rotate(0deg) translateX(0) translateY(-22px) scale(1.1); }
-.work-item:hover .fan.open .fan-right  { transform: rotate(16deg) translateX(94%) translateY(4px); }
+.work-item:hover .fan.open .fan-left   { transform: rotate(-16deg) translateX(-88%) translateY(50px); }
+.work-item:hover .fan.open .fan-center { transform: rotate(0deg) translateX(0) translateY(24px) scale(1.1); }
+.work-item:hover .fan.open .fan-right  { transform: rotate(16deg) translateX(88%) translateY(50px); }
 
 /* ---------- Aufsteigende Likes ---------- */
 .fan-likes {
   position: absolute;
-  inset: 0;
+  left: 50%;
+  bottom: 20%;
+  width: 0;
+  height: 0;
   pointer-events: none;
-  overflow: hidden;
   z-index: 0;          /* liegt hinter den Karten */
 }
 
 .like {
   position: absolute;
-  bottom: -110px;
-  font-size: 72px;
+  left: 0;
+  bottom: 0;
+  font-size: 64px;
   line-height: 1;
   opacity: 0;
-  color: var(--accent);
   filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
-  animation: floatUp 5.4s ease-in infinite;
+  animation: floatUp 5.4s ease-out infinite;
+  --dx: 0px;
 }
 
 @keyframes floatUp {
-  0%   { opacity: 0; transform: translateY(0) scale(0.45) rotate(0deg); }
-  15%  { opacity: 1; transform: translateY(-90px) scale(1) rotate(-7deg); }
-  72%  { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-560px) scale(0.95) rotate(9deg); }
+  0%   { opacity: 0; transform: translate(-50%, 0) scale(0.4) rotate(0deg); }
+  16%  { opacity: 1; transform: translate(calc(-50% + var(--dx) * 0.16), -80px) scale(1) rotate(-6deg); }
+  74%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), -420px) scale(0.9) rotate(8deg); }
 }
 
 /* Position, Groesse und Symbol werden per JS zufaellig gesetzt
@@ -1021,10 +1024,11 @@ section {
 }
 
 @media (max-width: 968px) {
-  .fan { min-height: 340px; }
-  .fan-card { max-width: 150px; }
-  .fan.open .fan-left  { transform: rotate(-11deg) translateX(-66%) translateY(8px); }
-  .fan.open .fan-right { transform: rotate(11deg) translateX(66%) translateY(8px); }
+  .fan { min-height: 400px; }
+  .fan-card { max-width: 168px; }
+  .fan.open .fan-left   { transform: rotate(-11deg) translateX(-66%) translateY(34px); }
+  .fan.open .fan-center { transform: rotate(0deg) translateX(0) translateY(18px) scale(1.05); }
+  .fan.open .fan-right  { transform: rotate(11deg) translateX(66%) translateY(34px); }
 }
 
 @media (max-width: 968px) {
@@ -1961,9 +1965,11 @@ a.contact-detail-value:hover { color: var(--accent); }
         <div class="work-visual">
           <div class="fan" id="svsFan">
             <div class="fan-likes" aria-hidden="true">
+              <span class="like">&#9917;</span>
+              <span class="like">&#127942;</span>
               <span class="like">&#10084;</span>
-              <span class="like">&#128077;</span>
-              <span class="like">&#10084;</span>
+              <span class="like">&#129305;</span>
+              <span class="like">&#128293;</span>
             </div>
 
             <div class="fan-card fan-left">
@@ -2493,12 +2499,27 @@ if (fan) {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   // Herz haeufig, Daumen und Flamme jeweils selten
-  const symbole = ['\u2764', '\u2764', '\u2764', '\u2764', '\u2764', '\u2764', '\uD83D\uDC4D', '\uD83D\uDD25'];
+  // Verein: Fussball und Jubel im Vordergrund, Herzen als Beiwerk
+  const symbole = [
+    '\u26BD',                   // Fussball
+    '\u26BD',                   // Fussball
+    '\uD83D\uDC4F',            // Applaus
+    '\uD83D\uDE4C',            // Jubel
+    '\uD83E\uDD1D',            // Handschlag
+    '\uD83C\uDFC6',            // Pokal
+    '\uD83E\uDD47',            // Goldmedaille
+    '\uD83D\uDD25',            // Flamme
+    '\u2764',                   // rotes Herz
+    '\uD83E\uDD0D',            // weisses Herz
+    '\uD83D\uDC4D'             // Daumen
+  ];
   const zufall = (min, max) => Math.random() * (max - min) + min;
+  const mobil = () => window.innerWidth < 968;
 
   const wuerfeln = (el) => {
-    el.style.left = zufall(2, 86) + '%';
-    el.style.fontSize = Math.round(zufall(52, 88) * (window.innerWidth < 968 ? 0.6 : 1)) + 'px';
+    const weite = mobil() ? 90 : 170;
+    el.style.setProperty('--dx', Math.round(zufall(-weite, weite)) + 'px');
+    el.style.fontSize = Math.round(zufall(48, 80) * (mobil() ? 0.62 : 1)) + 'px';
     el.textContent = symbole[Math.floor(Math.random() * symbole.length)];
   };
 
