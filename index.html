@@ -692,6 +692,92 @@ section {
 
 .work-live:hover { border-bottom-color: var(--accent); }
 
+/* ---------- Content-Mix: Reel im Handy + Print-Arbeiten ---------- */
+.mix {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mix-phone {
+  position: relative;
+  z-index: 3;
+  width: 34%;
+  max-width: 176px;
+  aspect-ratio: 9/16;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 4px solid #16161a;
+  outline: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.7);
+  transform: translateX(-22%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #000;
+}
+
+.mix-phone video,
+.mix-phone img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.mix-card {
+  position: absolute;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.55);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mix-card img { width: 100%; height: auto; display: block; }
+
+.mix-menu {
+  z-index: 2;
+  width: 27%;
+  max-width: 142px;
+  right: 18%;
+  top: 12%;
+  transform: rotate(5deg);
+}
+
+.mix-promo {
+  z-index: 1;
+  width: 30%;
+  max-width: 158px;
+  right: 4%;
+  bottom: 12%;
+  transform: rotate(-4deg);
+}
+
+.work-item:hover .mix-phone { transform: translateX(-26%) translateY(-8px); }
+.work-item:hover .mix-menu  { transform: rotate(7deg) translateY(-14px); }
+.work-item:hover .mix-promo { transform: rotate(-6deg) translateX(4%) translateY(6px); }
+
+.mix-badge {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  background: rgba(10, 10, 11, 0.8);
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  z-index: 5;
+}
+
+@media (max-width: 968px) {
+  .mix { min-height: 340px; }
+  .mix-phone { max-width: 132px; }
+  .mix-menu  { max-width: 104px; }
+  .mix-promo { max-width: 116px; }
+}
+
 /* ---------- Fächer für Social-Media-Grafiken ---------- */
 .fan {
   position: relative;
@@ -1609,7 +1695,30 @@ a.contact-detail-value:hover { color: var(--accent); }
       <!-- CASE 3: Champers -->
       <article class="work-item reveal">
         <div class="work-visual">
-          <div class="work-visual-label">▢ Screenshot · Champers Instagram</div>
+          <div class="mix">
+            <span class="mix-badge">Content-Mix</span>
+
+            <div class="mix-phone">
+              <video src="/images/champers-reel.mp4"
+                     poster="/images/champers-reel-poster.jpg"
+                     autoplay muted loop playsinline preload="none"
+                     aria-label="Ausschnitt aus einem Reel f&uuml;r Champers Bad Segeberg"></video>
+            </div>
+
+            <div class="mix-card mix-menu">
+              <picture>
+                <source srcset="/images/champers-menu.webp" type="image/webp">
+                <img src="/images/champers-menu.jpg" alt="Gestaltete Speisekarte f&uuml;r Champers Bad Segeberg" width="540" height="763" loading="lazy" decoding="async">
+              </picture>
+            </div>
+
+            <div class="mix-card mix-promo">
+              <picture>
+                <source srcset="/images/champers-lieferando.webp" type="image/webp">
+                <img src="/images/champers-lieferando.jpg" alt="Ank&uuml;ndigungsgrafik zum Lieferando-Start" width="540" height="675" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </div>
         </div>
         <div class="work-content">
           <div>
@@ -1623,11 +1732,11 @@ a.contact-detail-value:hover { color: var(--accent); }
             <div class="work-details">
               <div class="work-detail-block">
                 <div class="work-detail-label">Rolle</div>
-                <div class="work-detail-text">Komplette Social-Media-Betreuung, Content-Produktion, Foto- und Video-Content.</div>
+                <div class="work-detail-text">Komplette Social-Media-Betreuung samt Content-Produktion vor Ort &mdash; Foto, Video, Reels &mdash; sowie Grafik und Print: Speisekarte, Aktions- und Kampagnengrafiken.</div>
               </div>
               <div class="work-detail-block">
                 <div class="work-detail-label">Prozess</div>
-                <div class="work-detail-text">Konzeption eines konsistenten visuellen Systems, regelmäßige Content-Produktion vor Ort, Foto-Shootings und Reel-Produktion in eigener Umsetzung.</div>
+                <div class="work-detail-text">Konzeption eines visuellen Systems, das vom Instagram-Reel bis zur gedruckten Speisekarte tr&auml;gt. Regelm&auml;&szlig;ige Produktion vor Ort, Schnitt und Gestaltung in eigener Umsetzung &mdash; dadurch kurze Wege und ein Auftritt, der on- wie offline zusammenpasst.</div>
               </div>
               <div class="work-detail-block">
                 <div class="work-detail-label">Ergebnis</div>
@@ -1642,6 +1751,8 @@ a.contact-detail-value:hover { color: var(--accent); }
             <span class="work-tag">Adobe Creative Cloud</span>
             <span class="work-tag">Content Strategy</span>
             <span class="work-tag">Foto / Video</span>
+            <span class="work-tag">Reels</span>
+            <span class="work-tag">Print &amp; Speisekarte</span>
             <span class="work-tag">Instagram</span>
           </div>
         </div>
