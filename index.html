@@ -748,29 +748,32 @@ section {
   text-overflow: ellipsis;
 }
 
-/* Ausschnitt, durch den die lange Seite wandert */
+/* Ausschnitt: laeuft von allein und laesst sich selbst scrollen */
 .browser-viewport {
   position: relative;
   height: 330px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+  touch-action: pan-y;
 }
+
+.browser-viewport::-webkit-scrollbar { width: 5px; }
+.browser-viewport::-webkit-scrollbar-track { background: transparent; }
+.browser-viewport::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 3px;
+}
+.browser-viewport::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
 
 .browser-viewport img {
   width: 100%;
   height: auto;
   display: block;
-  will-change: transform;
-}
-
-.browser.live .browser-viewport img {
-  animation: pageScroll 34s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-}
-
-/* faehrt bis kurz vors Seitenende und wieder zurueck */
-@keyframes pageScroll {
-  0%, 6%    { transform: translateY(0); }
-  50%       { transform: translateY(calc(-100% + 330px)); }
-  94%, 100% { transform: translateY(0); }
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .browser-note {
@@ -1988,7 +1991,7 @@ a.contact-detail-value:hover { color: var(--accent); }
                 </picture>
               </div>
             </div>
-            <div class="browser-note">Gesamte Seite</div>
+            <div class="browser-note">Gesamte Seite &middot; scrollbar</div>
           </div>
         </div>
         <div class="work-content">
@@ -2032,7 +2035,7 @@ a.contact-detail-value:hover { color: var(--accent); }
       <article class="work-item img-right reveal">
         <div class="work-visual">
           <div class="board" id="uniBoard">
-            <span class="board-badge">Ein Motiv, vier Formate</span>
+            <span class="board-badge">Ein Motiv, drei Formate</span>
 
             <div class="board-col">
               <div class="board-item">
@@ -2043,16 +2046,6 @@ a.contact-detail-value:hover { color: var(--accent); }
                   </picture>
                 </div>
                 <div class="board-label">1920 &times; 1080</div>
-              </div>
-
-              <div class="board-item">
-                <div class="board-frame">
-                  <picture>
-                    <source srcset="/images/uni-camp-poster.webp" type="image/webp">
-                    <img src="/images/uni-camp-poster.jpg" alt="Kampagnenmotiv als A1-Plakat" width="420" height="747" loading="lazy" decoding="async">
-                  </picture>
-                </div>
-                <div class="board-label">A1 Plakat</div>
               </div>
             </div>
 
@@ -2098,7 +2091,7 @@ a.contact-detail-value:hover { color: var(--accent); }
               </div>
               <div class="work-detail-block">
                 <div class="work-detail-label">Prozess</div>
-                <div class="work-detail-text">Ein Motiv muss vom A1-Plakat bis zum schmalen Web-Banner funktionieren. Ich lege Bildausschnitt, Textmenge und Hierarchie je Format neu an, halte dabei aber Typografie, Farbwelt und Bildsprache des Corporate Designs durchg&auml;ngig. Vom gro&szlig;fl&auml;chigen A1-Plakat bis zum 640 Pixel schmalen Banner bleibt das Motiv als dieselbe Kampagne lesbar.</div>
+                <div class="work-detail-text">Ein Motiv muss vom A1-Plakat bis zum schmalen Web-Banner funktionieren. Ich lege Bildausschnitt, Textmenge und Hierarchie je Format neu an, halte dabei aber Typografie, Farbwelt und Bildsprache des Corporate Designs durchg&auml;ngig. Vom breiten Querformat bis zum 640 Pixel schmalen Banner bleibt das Motiv als dieselbe Kampagne lesbar.</div>
               </div>
               <div class="work-detail-block">
                 <div class="work-detail-label">Ergebnis</div>
@@ -2750,14 +2743,57 @@ if (fan) {
   fanObserver.observe(fan);
 }
 
-// Uni-Website: Seite im Browserfenster erst scrollen, wenn sie sichtbar ist
+// Uni-Website: Seite laeuft von allein durch, laesst sich aber selbst scrollen
 (() => {
   const br = document.getElementById('uniBrowser');
   if (!br) return;
-  const beobachter = new IntersectionObserver((e) => {
-    e.forEach(x => x.isIntersecting ? br.classList.add('live') : br.classList.remove('live'));
-  }, { threshold: 0.2 });
-  beobachter.observe(br);
+  const view = br.querySelector('.browser-viewport');
+  if (!view) return;
+
+  const reduziert = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let sichtbar = false;
+  let pauseBis = 0;          // Zeitstempel, bis zu dem der Autolauf ruht
+  let richtung = 1;          // 1 = abwaerts, -1 = aufwaerts
+  let letzte = 0;
+
+  // Bedienung durch den Nutzer hat Vorrang
+  const pausieren = () => { pauseBis = performance.now() + 3500; };
+  ['wheel', 'touchstart', 'pointerdown'].forEach(ev =>
+    view.addEventListener(ev, pausieren, { passive: true }));
+
+  // Ziehen mit der Maus
+  let zieht = false, startY = 0, startTop = 0;
+  view.addEventListener('pointerdown', (e) => {
+    zieht = true; startY = e.clientY; startTop = view.scrollTop;
+    view.setPointerCapture(e.pointerId);
+  });
+  view.addEventListener('pointermove', (e) => {
+    if (!zieht) return;
+    view.scrollTop = startTop - (e.clientY - startY);
+    pausieren();
+  });
+  ['pointerup', 'pointercancel'].forEach(ev =>
+    view.addEventListener(ev, () => { zieht = false; }));
+
+  new IntersectionObserver((eintraege) => {
+    eintraege.forEach(x => { sichtbar = x.isIntersecting; });
+  }, { threshold: 0.2 }).observe(br);
+
+  const tempo = 26;   // Pixel pro Sekunde
+  const schritt = (jetzt) => {
+    const delta = letzte ? (jetzt - letzte) / 1000 : 0;
+    letzte = jetzt;
+
+    if (sichtbar && !reduziert && jetzt > pauseBis) {
+      const maximum = view.scrollHeight - view.clientHeight;
+      let neuTop = view.scrollTop + richtung * tempo * delta;
+      if (neuTop >= maximum) { neuTop = maximum; richtung = -1; pauseBis = jetzt + 1200; }
+      if (neuTop <= 0)       { neuTop = 0;       richtung = 1;  pauseBis = jetzt + 1200; }
+      view.scrollTop = neuTop;
+    }
+    requestAnimationFrame(schritt);
+  };
+  requestAnimationFrame(schritt);
 })();
 
 // Uni-Kampagne: Formate gestaffelt einblenden
