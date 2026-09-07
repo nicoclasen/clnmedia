@@ -469,12 +469,11 @@ section {
   transform: translateY(-4px);
 }
 
-.work-item.reverse {
-  grid-template-columns: 1fr 1fr;
-}
-
-.work-item.reverse .work-visual { order: 2; }
-.work-item.reverse .work-content { order: 1; }
+/* Bildseite explizit setzen - unabhaengig von der Reihenfolge im HTML */
+.work-item.img-left  .work-visual  { order: 1; }
+.work-item.img-left  .work-content { order: 2; }
+.work-item.img-right .work-visual  { order: 2; }
+.work-item.img-right .work-content { order: 1; }
 
 .work-visual {
   position: relative;
@@ -691,6 +690,118 @@ section {
 }
 
 .work-live:hover { border-bottom-color: var(--accent); }
+
+/* ---------- Browserfenster mit durchscrollender Seite ---------- */
+.browser {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 28px;
+}
+
+.browser-window {
+  width: 100%;
+  max-width: 460px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.6);
+  background: var(--bg-elevated);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-item:hover .browser-window { transform: translateY(-6px); }
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: #17171b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.browser-dots { display: flex; gap: 5px; flex-shrink: 0; }
+
+.browser-dots span {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: block;
+}
+
+.browser-url {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  padding: 4px 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ausschnitt, durch den die lange Seite wandert */
+.browser-viewport {
+  position: relative;
+  height: 330px;
+  overflow: hidden;
+}
+
+.browser-viewport img {
+  width: 100%;
+  height: auto;
+  display: block;
+  will-change: transform;
+}
+
+.browser.live .browser-viewport img {
+  animation: pageScroll 34s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* faehrt bis kurz vors Seitenende und wieder zurueck */
+@keyframes pageScroll {
+  0%, 6%    { transform: translateY(0); }
+  50%       { transform: translateY(calc(-100% + 330px)); }
+  94%, 100% { transform: translateY(0); }
+}
+
+.browser-note {
+  position: absolute;
+  bottom: 26px;
+  left: 28px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.browser-note::before {
+  content: '';
+  width: 12px; height: 1px;
+  background: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .browser.live .browser-viewport img { animation: none; }
+}
+
+@media (max-width: 968px) {
+  .browser { min-height: 0; padding: 24px 20px; }
+  .browser-viewport { height: 260px; }
+  .browser-note { display: none; }
+}
 
 /* ---------- Formatboard: eine Kampagne, viele Formate ---------- */
 .board {
@@ -1125,11 +1236,14 @@ section {
 }
 
 @media (max-width: 968px) {
-  .work-item, .work-item.reverse {
+  .work-item {
     grid-template-columns: 1fr;
   }
-  .work-item.reverse .work-visual { order: 1; }
-  .work-item.reverse .work-content { order: 2; }
+  /* mobil immer Bild oben, Text darunter */
+  .work-item.img-left .work-visual,
+  .work-item.img-right .work-visual { order: 1; }
+  .work-item.img-left .work-content,
+  .work-item.img-right .work-content { order: 2; }
   .work-visual { min-height: 240px; }
   .work-content { padding: 32px 24px; }
   .work-title { font-size: 28px; }
@@ -1857,9 +1971,25 @@ a.contact-detail-value:hover { color: var(--accent); }
     <div class="work-list">
 
       <!-- CASE 1: Uni Lübeck -->
-      <article class="work-item reveal">
+      <article class="work-item img-left reveal">
         <div class="work-visual">
-          <div class="work-visual-label">▢ Screendesign · Uni Lübeck Website</div>
+          <div class="browser" id="uniBrowser">
+            <div class="browser-window">
+              <div class="browser-bar">
+                <div class="browser-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="browser-url">uni-luebeck.de &middot; L&uuml;GloMMa</div>
+              </div>
+              <div class="browser-viewport">
+                <picture>
+                  <source srcset="/images/uni-web-full.webp" type="image/webp">
+                  <img src="/images/uni-web-full.jpg"
+                       alt="Vollst&auml;ndige L&uuml;GloMMa-Seite der Universit&auml;t zu L&uuml;beck vom Kopfbereich bis zum Fu&szlig;"
+                       width="680" height="4844" loading="lazy" decoding="async">
+                </picture>
+              </div>
+            </div>
+            <div class="browser-note">Gesamte Seite</div>
+          </div>
         </div>
         <div class="work-content">
           <div>
@@ -1899,10 +2029,10 @@ a.contact-detail-value:hover { color: var(--accent); }
       </article>
 
       <!-- CASE: Uni Lübeck Kampagnen -->
-      <article class="work-item reverse reveal">
+      <article class="work-item img-right reveal">
         <div class="work-visual">
           <div class="board" id="uniBoard">
-            <span class="board-badge">Ein Motiv, f&uuml;nf Formate</span>
+            <span class="board-badge">Ein Motiv, vier Formate</span>
 
             <div class="board-col">
               <div class="board-item">
@@ -1918,11 +2048,11 @@ a.contact-detail-value:hover { color: var(--accent); }
               <div class="board-item">
                 <div class="board-frame">
                   <picture>
-                    <source srcset="/images/uni-handout.webp" type="image/webp">
-                    <img src="/images/uni-handout.jpg" alt="A4-Handout mit Campusplan und Zeitplan" width="800" height="566" loading="lazy" decoding="async">
+                    <source srcset="/images/uni-camp-poster.webp" type="image/webp">
+                    <img src="/images/uni-camp-poster.jpg" alt="Kampagnenmotiv als A1-Plakat" width="420" height="747" loading="lazy" decoding="async">
                   </picture>
                 </div>
-                <div class="board-label">A4 Print</div>
+                <div class="board-label">A1 Plakat</div>
               </div>
             </div>
 
@@ -1968,7 +2098,7 @@ a.contact-detail-value:hover { color: var(--accent); }
               </div>
               <div class="work-detail-block">
                 <div class="work-detail-label">Prozess</div>
-                <div class="work-detail-text">Ein Motiv muss vom A1-Plakat bis zum schmalen Web-Banner funktionieren. Ich lege Bildausschnitt, Textmenge und Hierarchie je Format neu an, halte dabei aber Typografie, Farbwelt und Bildsprache des Corporate Designs durchg&auml;ngig. Beim Handout kam Informationsdesign dazu: Campusplan, Zeitraster &uuml;ber vier Bl&ouml;cke und QR-Einstieg in den digitalen Zeitplan.</div>
+                <div class="work-detail-text">Ein Motiv muss vom A1-Plakat bis zum schmalen Web-Banner funktionieren. Ich lege Bildausschnitt, Textmenge und Hierarchie je Format neu an, halte dabei aber Typografie, Farbwelt und Bildsprache des Corporate Designs durchg&auml;ngig. Vom gro&szlig;fl&auml;chigen A1-Plakat bis zum 640 Pixel schmalen Banner bleibt das Motiv als dieselbe Kampagne lesbar.</div>
               </div>
               <div class="work-detail-block">
                 <div class="work-detail-label">Ergebnis</div>
@@ -1982,7 +2112,6 @@ a.contact-detail-value:hover { color: var(--accent); }
           <div class="work-tags">
             <span class="work-tag">Corporate Design</span>
             <span class="work-tag">Formatadaption</span>
-            <span class="work-tag">Informationsdesign</span>
             <span class="work-tag">Print &amp; Display</span>
             <span class="work-tag">Adobe InDesign</span>
           </div>
@@ -1990,7 +2119,7 @@ a.contact-detail-value:hover { color: var(--accent); }
       </article>
 
       <!-- CASE 2: Bachelorarbeit -->
-      <article class="work-item reverse reveal">
+      <article class="work-item img-left reveal">
         <div class="work-content">
           <div>
             <div class="work-meta-top">
@@ -2055,7 +2184,7 @@ a.contact-detail-value:hover { color: var(--accent); }
       </article>
 
       <!-- CASE 3: Champers -->
-      <article class="work-item reverse reveal">
+      <article class="work-item img-right reveal">
         <div class="work-visual">
           <div class="mix">
             <span class="mix-badge">Content-Mix</span>
@@ -2158,7 +2287,7 @@ a.contact-detail-value:hover { color: var(--accent); }
       </article>
 
       <!-- CASE 4: SV Schackendorf -->
-      <article class="work-item reveal">
+      <article class="work-item img-left reveal">
         <div class="work-visual">
           <div class="fan" id="svsFan">
             <div class="fan-likes" aria-hidden="true">
@@ -2620,6 +2749,16 @@ if (fan) {
   }, { threshold: 0.35 });
   fanObserver.observe(fan);
 }
+
+// Uni-Website: Seite im Browserfenster erst scrollen, wenn sie sichtbar ist
+(() => {
+  const br = document.getElementById('uniBrowser');
+  if (!br) return;
+  const beobachter = new IntersectionObserver((e) => {
+    e.forEach(x => x.isIntersecting ? br.classList.add('live') : br.classList.remove('live'));
+  }, { threshold: 0.2 });
+  beobachter.observe(br);
+})();
 
 // Uni-Kampagne: Formate gestaffelt einblenden
 (() => {
