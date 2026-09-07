@@ -6,6 +6,26 @@
 <title>Nico Clasen — Interface- & Frontend-Designer</title>
 <meta name="description" content="Nico Clasen — Interface- & Frontend-Designer aus Lübeck. Konzeption und Umsetzung digitaler Projekte. Portfolio, Cases und Kontakt.">
 
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+<meta name="theme-color" content="#0A0A0B">
+
+<link rel="canonical" href="https://clnmedia.de/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://clnmedia.de/">
+<meta property="og:site_name" content="Nico Clasen">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="Nico Clasen — Interface- & Frontend-Designer">
+<meta property="og:description" content="Konzeption und Umsetzung digitaler Projekte — von Wireframe bis produktivem Code. Portfolio, Cases und Kontakt.">
+<meta property="og:image" content="https://clnmedia.de/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="cln. — Nico Clasen, Interface- und Frontend-Designer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nico Clasen — Interface- & Frontend-Designer">
+<meta name="twitter:description" content="Konzeption und Umsetzung digitaler Projekte — von Wireframe bis produktivem Code. Portfolio, Cases und Kontakt.">
+<meta name="twitter:image" content="https://clnmedia.de/images/og-image.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com">
@@ -202,7 +222,127 @@ body::before {
 
 .nav-cta:hover { transform: translateY(-2px); background: var(--accent); color: var(--text); }
 
-@media (max-width: 968px) { .nav-links { display: none; } }
+/* ---------- Mobile Navigation ---------- */
+.nav-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border-hover);
+  border-radius: 50%;
+  cursor: none;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 120;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.nav-toggle:hover { border-color: var(--text); }
+
+/* zwei Striche, die sich zum Kreuz drehen */
+.nav-toggle span {
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  height: 1.5px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s;
+}
+
+.nav-toggle span:nth-child(1) { transform: translateY(-4px); }
+.nav-toggle span:nth-child(2) { transform: translateY(4px); }
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { transform: rotate(-45deg); }
+
+.nav-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 28px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px);
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
+}
+
+.nav-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.nav-menu ul { list-style: none; }
+
+.nav-menu li {
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-menu a {
+  display: block;
+  padding: 20px 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 34px;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  text-decoration: none;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: color 0.2s;
+}
+
+.nav-menu.open a {
+  animation: menuLineIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.nav-menu.open li:nth-child(1) a { animation-delay: 0.06s; }
+.nav-menu.open li:nth-child(2) a { animation-delay: 0.12s; }
+.nav-menu.open li:nth-child(3) a { animation-delay: 0.18s; }
+.nav-menu.open li:nth-child(4) a { animation-delay: 0.24s; }
+.nav-menu.open li:nth-child(5) a { animation-delay: 0.30s; }
+
+@keyframes menuLineIn { to { transform: translateY(0); opacity: 1; } }
+
+.nav-menu a:active { color: var(--accent); }
+
+.nav-menu-foot {
+  margin-top: 40px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  line-height: 2;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.36s;
+}
+
+.nav-menu.open .nav-menu-foot { opacity: 1; }
+.nav-menu-foot a { color: var(--text-dim); text-decoration: none; }
+
+body.menu-offen { overflow: hidden; }
+
+@media (max-width: 968px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-cta { display: none; }
+  /* Overlay ueberdeckt die Nav, deshalb Mischmodus aus */
+  .nav.menu-aktiv { mix-blend-mode: normal; }
+}
+
+@media (min-width: 969px) {
+  .nav-menu { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-menu, .nav-menu a, .nav-toggle span { transition-duration: 0.01s; }
+  .nav-menu.open a { animation: none; transform: none; opacity: 1; }
+}
 
 /* ==================== HERO ==================== */
 .hero {
@@ -1905,7 +2045,25 @@ a.contact-detail-value:hover { color: var(--accent); }
     <li><a href="#skills">Skills</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Kontakt</a>
+
+  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Men&uuml; &ouml;ffnen">
+    <span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-menu" id="navMenu" role="dialog" aria-modal="true" aria-label="Navigation" hidden>
+  <ul>
+    <li><a href="#work">Arbeiten</a></li>
+    <li><a href="#services">Leistungen</a></li>
+    <li><a href="#about">&Uuml;ber</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+  <div class="nav-menu-foot">
+    <a href="mailto:hallo@clnmedia.de">hallo@clnmedia.de</a><br>
+    <a href="https://www.linkedin.com/in/nico-clasen/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</div>
 
 <!-- ==================== MAIN PAGE ==================== -->
 
@@ -1920,7 +2078,7 @@ a.contact-detail-value:hover { color: var(--accent); }
   <div class="hero-grid container">
     <div class="hero-top">
       <div class="hero-eyebrow">
-        FREELANCE <span class="divider">·</span> LÜBECK <span class="divider">·</span> <span class="highlight">SEIT 2025</span>
+        WERKSTUDENT <span class="divider">·</span> UNIVERSIT&Auml;T ZU L&Uuml;BECK <span class="divider">·</span> <span class="highlight">SEIT 09/2023</span>
       </div>
     </div>
 
@@ -1930,7 +2088,7 @@ a.contact-detail-value:hover { color: var(--accent); }
     <div class="hero-meta">
       <div>
         <p class="hero-description">
-          Konzeption und Umsetzung digitaler Projekte — von Wireframe bis produktivem Code. Für Agenturen, Startups und kleine Unternehmen.
+          Konzeption und Umsetzung digitaler Projekte &mdash; von Wireframe bis produktivem Code. Aktuell als Werkstudent im Studierendenmarketing der Universit&auml;t zu L&uuml;beck, nebenbei in kleinem Rahmen f&uuml;r Vereine und lokale Unternehmen.
         </p>
 
         <div class="hero-cta-group">
@@ -1945,10 +2103,10 @@ a.contact-detail-value:hover { color: var(--accent); }
           <span><strong>Werkstudent</strong> im Studierendenmarketing, <br>Universität zu Lübeck</span>
         </div>
         <div class="hero-fact">
-          <span><strong>Selbstständig</strong> für Vereine, Gastro <br>und kleine Unternehmen</span>
+          <span><strong>Nebenbei selbstst&auml;ndig</strong> in kleinem Rahmen <br>f&uuml;r Vereine und lokale Unternehmen</span>
         </div>
         <div class="hero-fact">
-          <span><strong>Bachelor Medieninformatik</strong> (Note 1,3), <br>Universität zu Lübeck</span>
+          <span><strong>Bachelor Medieninformatik</strong> (Abschluss 2026), <br>Universit&auml;t zu L&uuml;beck</span>
         </div>
       </div>
     </div>
@@ -2203,7 +2361,7 @@ a.contact-detail-value:hover { color: var(--accent); }
                 <span class="mix-stat-value" id="reachCounter">0</span>
                 <span class="mix-stat-arrow" aria-hidden="true">&#9650;</span>
               </div>
-              <div class="mix-stat-label">Erreichte Konten / Monat<br>Instagram &amp; TikTok</div>
+              <div class="mix-stat-label">Erreichte Konten / Monat<br>organisch, ohne Paid Ads</div>
             </div>
 
             <div class="mix-reel">
@@ -2244,7 +2402,7 @@ a.contact-detail-value:hover { color: var(--accent); }
           <div>
             <div class="work-meta-top">
               <span>04 · Content &amp; Social Media</span>
-              <span>Freelance · seit 02/2025</span>
+              <span>Freelance · seit 10/2025</span>
             </div>
             <h3 class="work-title">Champers Bad Segeberg</h3>
             <div class="work-subtitle">Social Media & Content Production</div>
@@ -2261,7 +2419,7 @@ a.contact-detail-value:hover { color: var(--accent); }
               <div class="work-detail-block">
                 <div class="work-detail-label">Ergebnis</div>
                 <div class="work-result">
-                  <span class="accent-num">&Uuml;ber 200.000 erreichte Konten</span> in einem Monat &uuml;ber Instagram und TikTok &mdash; ein Gro&szlig;teil davon aus dem direkten Umkreis. Also genau die Leute, die auch tats&auml;chlich vorbeikommen k&ouml;nnen.
+                  <span class="accent-num">&Uuml;ber 200.000 organisch erreichte Konten</span> in einem Monat &uuml;ber Instagram und TikTok, ohne Paid Ads &mdash; ein Gro&szlig;teil davon aus dem direkten Umkreis. Also genau die Leute, die auch tats&auml;chlich vorbeikommen k&ouml;nnen.
                 </div>
               </div>
             </div>
@@ -2316,7 +2474,7 @@ a.contact-detail-value:hover { color: var(--accent); }
           <div>
             <div class="work-meta-top">
               <span>05 · Grafik &amp; Visual System</span>
-              <span>Freelance &middot; seit 2025</span>
+              <span>Freelance · seit 10/2025</span>
             </div>
             <h3 class="work-title">SV Schackendorf</h3>
             <div class="work-subtitle">Visuelles System f&uuml;r den Spieltag</div>
@@ -2443,7 +2601,7 @@ a.contact-detail-value:hover { color: var(--accent); }
         </p>
 
         <p>
-          Nach meinem Bachelor in Medieninformatik an der Universität zu Lübeck (Note <strong>1,3</strong>) arbeite ich heute an zwei Fronten: Als Werkstudent im Studierendenmarketing der Uni Lübeck bin ich Teil des Relaunch-Teams für die Studierenden-Website — mit Fokus auf Screendesign, Wireframes und Frontend-Umsetzung. Parallel betreue ich selbstständig eigene Projekte für kleine Unternehmen und Vereine.
+          Aktuell studiere ich Medieninformatik an der Universit&auml;t zu L&uuml;beck, Abschluss voraussichtlich 06/2026. Parallel arbeite ich dort als <strong>Werkstudent im Studierendenmarketing</strong> und bin Teil des Relaunch-Teams f&uuml;r die Studierenden-Website &mdash; mit Fokus auf Screendesign, Wireframes und Frontend-Umsetzung. Nebenbei betreue ich in kleinem Rahmen eigene Projekte f&uuml;r Vereine und lokale Unternehmen.
         </p>
 
         <p>
@@ -2479,7 +2637,7 @@ a.contact-detail-value:hover { color: var(--accent); }
                 <span class="career-block-role">Bachelor Medieninformatik</span>
                 <span class="career-block-org"> · Universität zu Lübeck</span>
               </div>
-              <span class="career-block-period">Abschluss 2026 · Note 1,3</span>
+              <span class="career-block-period">Abschluss 2026</span>
             </div>
             <p class="career-block-desc">Bachelorarbeit: Interaktive Campuskarte auf OpenStreetMap-Basis — von Anforderungsanalyse über Wireframes und Prototyping bis zur technischen Umsetzung.</p>
           </div>
@@ -2712,6 +2870,57 @@ document.querySelectorAll('a, button, .work-item, .service-card, .career-block')
   el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
 });
+
+// Mobiles Menue
+(() => {
+  const knopf = document.getElementById('navToggle');
+  const menue = document.getElementById('navMenu');
+  const navbar = document.getElementById('mainNav');
+  if (!knopf || !menue) return;
+
+  let offen = false;
+
+  const setzen = (auf) => {
+    offen = auf;
+    knopf.setAttribute('aria-expanded', String(auf));
+    knopf.setAttribute('aria-label', auf ? 'Menü schließen' : 'Menü öffnen');
+    document.body.classList.toggle('menu-offen', auf);
+    navbar.classList.toggle('menu-aktiv', auf);
+
+    if (auf) {
+      menue.hidden = false;
+      requestAnimationFrame(() => menue.classList.add('open'));
+      menue.querySelector('a').focus({ preventScroll: true });
+    } else {
+      menue.classList.remove('open');
+      // erst nach der Ausblendung aus dem Tab-Fluss nehmen
+      setTimeout(() => { if (!offen) menue.hidden = true; }, 380);
+      knopf.focus({ preventScroll: true });
+    }
+  };
+
+  knopf.addEventListener('click', () => setzen(!offen));
+
+  // Klick auf einen Link schliesst das Menue
+  menue.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => setzen(false)));
+
+  // ESC schliesst, Tab bleibt im Menue gefangen
+  document.addEventListener('keydown', (e) => {
+    if (!offen) return;
+    if (e.key === 'Escape') { setzen(false); return; }
+    if (e.key !== 'Tab') return;
+    const ziele = [knopf, ...menue.querySelectorAll('a')];
+    const erste = ziele[0], letzte = ziele[ziele.length - 1];
+    if (e.shiftKey && document.activeElement === erste) { e.preventDefault(); letzte.focus(); }
+    else if (!e.shiftKey && document.activeElement === letzte) { e.preventDefault(); erste.focus(); }
+  });
+
+  // beim Wechsel auf Desktop wieder aufräumen
+  window.matchMedia('(min-width: 969px)').addEventListener('change', (e) => {
+    if (e.matches && offen) setzen(false);
+  });
+})();
 
 // Nav scroll state
 const nav = document.querySelector('.nav');
