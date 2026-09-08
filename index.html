@@ -2056,16 +2056,31 @@ a.contact-detail-value:hover { color: var(--accent); }
 ::selection { background: var(--accent); color: var(--text); }
 
 body {
-  cursor: auto;
+  cursor: none;
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 body::before { opacity: 0.014; }
-.cursor { display: none !important; }
-a, button, input, select, textarea { cursor: auto; }
-a, button { cursor: pointer; }
+
+/* Eigener Cursor wie zuvor. Wichtig: der Systemcursor muss auf ALLEN
+   Elementen aus sein, sonst blitzt er stellenweise auf - und dort, wo
+   ein Element cursor:none traegt, waere sonst gar nichts zu sehen. */
+.cursor { display: block; }
+
+a, button, input, select, textarea, label, summary,
+[role="button"], [tabindex] { cursor: none; }
+
+/* Auf Touch-Geraeten und ohne Maus: Systemcursor zurueck */
+@media (max-width: 768px), (hover: none), (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor { display: none; }
+  a, button, input, select, textarea, label, summary,
+  [role="button"], [tabindex] { cursor: auto; }
+  a, button, [role="button"] { cursor: pointer; }
+  input, textarea { cursor: text; }
+}
 
 :focus-visible {
   outline: 2px solid var(--accent);

@@ -292,10 +292,18 @@ body::before {
 }
 
 ::selection { background: var(--accent); color: var(--text); }
-body { cursor: auto; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { cursor: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 body::before { opacity: .014; }
-.cursor { display: none !important; }
-a, button { cursor: pointer; }
+.cursor { display: block; }
+a, button, input, select, textarea, label, summary,
+[role="button"], [tabindex] { cursor: none; }
+@media (max-width: 768px), (hover: none), (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor { display: none; }
+  a, button, input, select, textarea, label, summary,
+  [role="button"], [tabindex] { cursor: auto; }
+  a, button, [role="button"] { cursor: pointer; }
+}
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
 .nav {
