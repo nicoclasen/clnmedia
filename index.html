@@ -2055,6 +2055,18 @@ a.contact-detail-value:hover { color: var(--accent); }
 
 ::selection { background: var(--accent); color: var(--text); }
 
+/* Systemsteuerelemente (Auswahlmenues, Bildlaufleisten, Datumsfelder)
+   im dunklen Schema rendern lassen */
+:root { color-scheme: dark; }
+
+/* Das aufgeklappte Menue zeichnet das Betriebssystem - Farben deshalb
+   ausdruecklich auf den Optionen setzen, nicht nur auf dem Feld */
+.form-select option,
+.form-select optgroup {
+  background-color: #16161A;
+  color: #F5F3EF;
+}
+
 body {
   cursor: none;
   background: var(--bg);
@@ -2114,7 +2126,8 @@ a, button, input, select, textarea, label, summary,
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 0;
-  text-transform: uppercase;
+  /* bewusst klein geschrieben - passt zu Favicon und Wortmarke */
+  text-transform: none;
 }
 
 .nav-links { gap: 30px; }
@@ -2543,6 +2556,7 @@ section { padding: 144px 0; }
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.02em;
+  text-transform: none;
   margin-bottom: 72px;
 }
 .footer-tagline {

@@ -300,6 +300,7 @@ body::before {
 }
 
 ::selection { background: var(--accent); color: var(--text); }
+:root { color-scheme: dark; }
 body { cursor: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 body::before { opacity: .014; }
 .cursor { display: block; }
@@ -332,7 +333,8 @@ a, button, input, select, textarea, label, summary,
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 0;
-  text-transform: uppercase;
+  /* bewusst klein geschrieben - passt zu Favicon und Wortmarke */
+  text-transform: none;
 }
 .nav-links { gap: 30px; }
 .nav-links a { font-size: 10px; letter-spacing: .18em; color: var(--text-muted); }
