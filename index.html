@@ -2101,6 +2101,12 @@ a.contact-detail-value:hover { color: var(--accent); }
   color: #F5F3EF;
 }
 
+/* Solange nur der Platzhalter gewaehlt ist, ist das Pflichtfeld ungueltig.
+   Es liest sich dann wie ein Platzhalter, nicht wie eine Angabe.
+   --text-dim entspricht der Platzhalterfarbe der uebrigen Felder. */
+.form-select:invalid { color: var(--text-dim); }
+.form-select option[value=""] { color: #77736F; }
+
 body {
   cursor: none;
   background: var(--bg);
@@ -3678,9 +3684,9 @@ section { padding: clamp(104px, 15vh, 184px) 0; }
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="cf-anlass">Anlass</label>
-          <select id="cf-anlass" name="anlass" class="form-select">
-            <option>Bewerbungs-Anfrage / Job-Angebot</option>
+          <label class="form-label" for="cf-anlass">Anlass *</label>
+          <select id="cf-anlass" name="anlass" class="form-select" required>
+            <option value="" disabled selected>Bitte ausw&auml;hlen</option>
             <option>Freelance-Projekt</option>
             <option>Kollaboration</option>
             <option>Anderes</option>
