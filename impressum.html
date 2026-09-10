@@ -16,24 +16,24 @@
 <link rel="preconnect" href="https://api.fontshare.com">
 
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&f[]=cabinet-grotesk@400,500,700,800,900&f[]=instrument-serif@400,400i&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg: #0A0A0B;
-  --bg-card: #111113;
-  --bg-elevated: #16161A;
-  --text: #FAFAFA;
-  --text-dim: #6B6B70;
-  --text-muted: #9A9AA0;
-  --accent: #FF2D2D;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.2);
+  --bg: #0A0A0A;
+  --bg-card: #0E0E0E;
+  --bg-elevated: #131314;
+  --text: #F5F3EF;
+  --text-dim: #77736F;
+  --text-muted: #AAA6A1;
+  --accent: #FF3038;
+  --border: rgba(245, 243, 239, 0.10);
+  --border-hover: rgba(245, 243, 239, 0.30);
 
   --font-display: 'Barlow Condensed', 'Cabinet Grotesk', sans-serif;
   --font-editorial: 'Barlow Condensed', 'Cabinet Grotesk', sans-serif;
   --font-body: 'General Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-label: 'General Sans', 'Inter', system-ui, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -119,7 +119,7 @@ body::before {
 }
 
 .nav-links a {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
@@ -148,7 +148,7 @@ body::before {
   color: var(--bg);
   border: none;
   border-radius: 100px;
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
@@ -173,7 +173,7 @@ body::before {
 }
 
 .legal-back {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 12px;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -249,7 +249,7 @@ body::before {
   display: flex;
   justify-content: space-between;
   padding-top: 32px;
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 12px;
   color: var(--text-dim);
   flex-wrap: wrap;
@@ -276,19 +276,19 @@ body::before {
    Same restrained technical system as the portfolio.
    ====================================================================== */
 :root {
-  --bg: #09090A;
-  --bg-card: #0D0D0F;
-  --bg-elevated: #121216;
+  --bg: #0A0A0A;
+  --bg-card: #0E0E0E;
+  --bg-elevated: #131314;
   --text: #F5F3EF;
   --text-dim: #77736F;
   --text-muted: #AAA6A1;
   --accent: #FF3038;
-  --border: rgba(245, 243, 239, 0.13);
-  --border-hover: rgba(255, 48, 56, 0.72);
+  --border: rgba(245, 243, 239, 0.10);
+  --border-hover: rgba(245, 243, 239, 0.30);
   --font-display: 'Barlow Condensed', 'Cabinet Grotesk', sans-serif;
   --font-editorial: 'General Sans', sans-serif;
   --font-body: 'General Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-label: 'General Sans', 'Inter', system-ui, sans-serif;
 }
 
 ::selection { background: var(--accent); color: var(--text); }
@@ -357,12 +357,12 @@ a, button, input, select, textarea, label, summary,
   margin-bottom: 72px;
   padding-top: 18px;
   border-top: 1px solid var(--border);
-  font-family: var(--font-display);
-  font-size: clamp(72px, 10vw, 146px);
-  font-weight: 700;
-  line-height: .8;
-  letter-spacing: -.01em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: clamp(38px, 4.8vw, 72px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -.042em;
+  text-transform: none;
 }
 .legal-page h2 {
   margin-top: 52px;
@@ -403,7 +403,7 @@ a, button, input, select, textarea, label, summary,
   .nav { padding: 20px; }
   .nav.scrolled { padding: 16px 20px; }
   .legal-page { padding: 118px 20px 64px; }
-  .legal-page h1 { margin-bottom: 54px; font-size: clamp(64px, 22vw, 96px); }
+  .legal-page h1 { margin-bottom: 54px; font-size: clamp(32px, 8.6vw, 46px); }
   .legal-page h2 { margin-top: 42px; }
   .footer-container { padding: 0 20px; }
   .footer-bottom { flex-direction: column; }
@@ -425,7 +425,7 @@ a, button, input, select, textarea, label, summary,
     <li><a href="/#about">Über</a></li>
     <li><a href="/#skills">Skills</a></li>
   </ul>
-  <a href="/#contact" class="nav-cta">Kontakt</a>
+  <a href="/#contact" class="nav-cta">Gespräch starten</a>
 </nav>
 
 <!-- ==================== IMPRESSUM ==================== -->
