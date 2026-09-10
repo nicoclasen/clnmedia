@@ -1365,6 +1365,23 @@ section {
 .work-item:hover .fan.open .fan-center { transform: rotate(0deg) translateX(0) translateY(24px) scale(1.1); }
 .work-item:hover .fan.open .fan-right  { transform: rotate(16deg) translateX(88%) translateY(50px); }
 
+/* Solange nur zwei Karten im Faecher liegen, stehen sie symmetrisch zur Mitte.
+   Damit steigen die Emojis, die bei 50% sitzen, genau hinter ihnen auf.
+   Kommt die dritte Karte ins Markup zurueck, greifen automatisch wieder
+   die dreiteiligen Regeln darueber. */
+.fan:not(:has(.fan-right)).open .fan-left {
+  transform: rotate(-9deg) translateX(-40%) translateY(42px);
+}
+.fan:not(:has(.fan-right)).open .fan-center {
+  transform: rotate(9deg) translateX(40%) translateY(42px) scale(1);
+}
+.work-item:hover .fan:not(:has(.fan-right)).open .fan-left {
+  transform: rotate(-13deg) translateX(-50%) translateY(34px);
+}
+.work-item:hover .fan:not(:has(.fan-right)).open .fan-center {
+  transform: rotate(13deg) translateX(50%) translateY(34px) scale(1);
+}
+
 /* ---------- Aufsteigende Likes ---------- */
 .fan-likes {
   position: absolute;
@@ -1410,6 +1427,13 @@ section {
   .fan.open .fan-left   { transform: rotate(-11deg) translateX(-66%) translateY(34px); }
   .fan.open .fan-center { transform: rotate(0deg) translateX(0) translateY(18px) scale(1.05); }
   .fan.open .fan-right  { transform: rotate(11deg) translateX(66%) translateY(34px); }
+
+  .fan:not(:has(.fan-right)).open .fan-left {
+    transform: rotate(-9deg) translateX(-36%) translateY(26px);
+  }
+  .fan:not(:has(.fan-right)).open .fan-center {
+    transform: rotate(9deg) translateX(36%) translateY(26px) scale(1);
+  }
 }
 
 @media (max-width: 968px) {
@@ -3373,12 +3397,19 @@ section { padding: clamp(104px, 15vh, 184px) 0; }
                 <img src="/images/svs-2.jpg" alt="Matchday-Grafik SV Schackendorf gegen TuS Hartenholm, Viertelfinale" width="800" height="1422" loading="lazy" decoding="async">
               </picture>
             </div>
+            <!-- Dritte Karte ausgeblendet: svs-3 zeigt dieselbe Viertelfinale-Grafik
+                 wie svs-2. Sobald ein eigenes Motiv vorliegt, Bild austauschen und
+                 diesen Block wieder einkommentieren - der Faecher stellt sich
+                 automatisch auf drei Karten um.
             <div class="fan-card fan-right">
               <picture>
                 <source srcset="/images/svs-3.webp" type="image/webp">
                 <img src="/images/svs-3.jpg" alt="Aufstellungs-Grafik SV Schackendorf" width="800" height="1422" loading="lazy" decoding="async">
               </picture>
             </div>
+            -->
+
+
           </div>
         </div>
 
