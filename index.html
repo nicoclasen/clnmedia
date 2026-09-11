@@ -769,9 +769,9 @@ section {
 .showcase-mobile {
   overflow: hidden;
   background: var(--bg-elevated);
-  /* gestufter Schatten: enge Kante + weiter Abwurf = Tiefe ohne Härte */
+  /* gestufter Schatten: enge Kante + weiter Abwurf = Tiefe ohne Härte.
+     Ohne Rahmen traegt jetzt allein der Schatten die Abgrenzung. */
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
     0 2px 6px rgba(0, 0, 0, 0.35),
     0 14px 28px rgba(0, 0, 0, 0.4),
     0 34px 70px rgba(0, 0, 0, 0.5);
@@ -788,7 +788,6 @@ section {
   z-index: 1;
   width: 88%;
   margin-left: 7%;
-  border: 1px solid rgba(255, 255, 255, 0.13);
 }
 
 /* vordere Ebene: beide auf einer Linie mit dem unteren Rand */
@@ -798,7 +797,6 @@ section {
   bottom: 14px;
   width: 33%;
   max-width: 214px;
-  border: 1px solid rgba(255, 255, 255, 0.13);
   z-index: 2;
 }
 
