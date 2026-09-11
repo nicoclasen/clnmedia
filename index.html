@@ -788,9 +788,30 @@ section {
 
 .showcase-mobile img { width: 100%; height: auto; display: block; }
 
+/* Indoor-Ansicht: Geschossplan im Tablet-Rahmen unten links.
+   Das Motiv ist fast quadratisch, deshalb kein Handy-Ausschnitt,
+   sondern ein eigener Rahmen im Seitenverhaeltnis des Screenshots. */
+.showcase-tablet {
+  position: absolute;
+  left: 4%;
+  bottom: 6%;
+  width: 34%;
+  max-width: 214px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 3px solid #1c1c20;
+  outline: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.65);
+  background: #fff;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.showcase-tablet img { width: 100%; height: auto; display: block; }
+
 /* Beim Hover leicht auseinanderziehen */
 .work-item:hover .showcase-desktop { transform: translateX(-9%) translateY(-6px); }
 .work-item:hover .showcase-mobile  { transform: translateX(4%) translateY(-10px); }
+.work-item:hover .showcase-tablet  { transform: translateX(-3%) translateY(-8px); }
 
 .showcase-badge {
   position: absolute;
@@ -811,6 +832,7 @@ section {
 @media (max-width: 968px) {
   .showcase { min-height: 300px; padding: 24px 16px; }
   .showcase-mobile { max-width: 104px; }
+  .showcase-tablet { max-width: 118px; }
 }
 
 /* Live-Link im Case */
@@ -3249,7 +3271,7 @@ section { padding: clamp(104px, 15vh, 184px) 0; }
         </div>
         <div class="work-visual">
           <div class="showcase">
-            <span class="showcase-badge">Responsive</span>
+            <span class="showcase-badge">Outdoor &amp; Indoor</span>
             <div class="showcase-desktop">
               <picture>
                 <source srcset="/images/campus-desktop.webp" type="image/webp">
@@ -3264,6 +3286,14 @@ section { padding: clamp(104px, 15vh, 184px) 0; }
                 <img src="/images/campus-mobile.jpg"
                      alt="Campuskarte auf dem Smartphone: eingezeichnete Fu&szlig;route mit Gehzeit und Distanz"
                      width="560" height="1217" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="showcase-tablet">
+              <picture>
+                <source srcset="/images/campus-indoor.webp" type="image/webp">
+                <img src="/images/campus-indoor.jpg"
+                     alt="Indoor-Ansicht der Campuskarte: Geschossplan von Geb&auml;ude 64 mit Raumnummern, Geschosswahl und Gehzeit"
+                     width="815" height="864" loading="lazy" decoding="async">
               </picture>
             </div>
           </div>
