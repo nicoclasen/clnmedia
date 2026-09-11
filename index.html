@@ -747,76 +747,73 @@ section {
   letter-spacing: 0.1em;
 }
 
-/* ---------- Responsive-Showcase: Desktop + Handy ---------- */
+/* ---------- Showcase: eine Anwendung, drei Ansichten ----------
+   Gestaltungsregeln, damit es nicht nach Collage aussieht:
+   - alle Rahmen tragen dieselbe Haarlinie, denselben Schatten
+   - die beiden vorderen Ansichten stehen auf einer gemeinsamen Linie
+   - kein Rahmen ist dunkel abgesetzt, nichts sitzt schief
+   - der Hover bewegt alles in dieselbe Richtung                     */
 .showcase {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 420px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 24px;
+  min-height: 470px;
+  padding: 52px 28px 34px;
 }
 
+/* gemeinsame Rahmensprache */
+.showcase-desktop,
+.showcase-tablet,
+.showcase-mobile {
+  overflow: hidden;
+  background: var(--bg-elevated);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 26px 56px rgba(0, 0, 0, 0.6);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.showcase-desktop img,
+.showcase-tablet img,
+.showcase-mobile img { width: 100%; height: auto; display: block; }
+
+/* hintere Ebene: die Kartenansicht */
 .showcase-desktop {
   position: relative;
-  width: 88%;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
-  transform: translateX(-6%);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 84%;
+  margin-left: 9%;
+  border-radius: 10px;
 }
 
-.showcase-desktop img { width: 100%; height: auto; display: block; }
+/* vordere Ebene: beide auf einer Linie mit dem unteren Rand */
+.showcase-tablet {
+  position: absolute;
+  left: 26px;
+  bottom: 34px;
+  width: 30%;
+  max-width: 198px;
+  border-radius: 10px;
+}
 
 .showcase-mobile {
   position: absolute;
-  right: 4%;
-  bottom: 6%;
-  width: 27%;
-  max-width: 148px;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 3px solid #1c1c20;
-  outline: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.65);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  right: 30px;
+  bottom: 34px;
+  width: 17%;
+  max-width: 114px;
+  border-radius: 14px;
 }
 
-.showcase-mobile img { width: 100%; height: auto; display: block; }
-
-/* Indoor-Ansicht: Geschossplan im Tablet-Rahmen unten links.
-   Das Motiv ist fast quadratisch, deshalb kein Handy-Ausschnitt,
-   sondern ein eigener Rahmen im Seitenverhaeltnis des Screenshots. */
-.showcase-tablet {
-  position: absolute;
-  left: 4%;
-  bottom: 6%;
-  width: 34%;
-  max-width: 214px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 3px solid #1c1c20;
-  outline: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.65);
-  background: #fff;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.showcase-tablet img { width: 100%; height: auto; display: block; }
-
-/* Beim Hover leicht auseinanderziehen */
-.work-item:hover .showcase-desktop { transform: translateX(-9%) translateY(-6px); }
-.work-item:hover .showcase-mobile  { transform: translateX(4%) translateY(-10px); }
-.work-item:hover .showcase-tablet  { transform: translateX(-3%) translateY(-8px); }
+/* Hover: gemeinsames, ruhiges Anheben statt Auseinanderfliegen */
+.work-item:hover .showcase-desktop { transform: translateY(-8px); }
+.work-item:hover .showcase-tablet  { transform: translateY(-5px); }
+.work-item:hover .showcase-mobile  { transform: translateY(-5px); }
 
 .showcase-badge {
   position: absolute;
   top: 20px;
-  left: 24px;
+  left: 26px;
   font-family: var(--font-label);
   font-size: 10px;
   text-transform: uppercase;
@@ -830,9 +827,10 @@ section {
 }
 
 @media (max-width: 968px) {
-  .showcase { min-height: 300px; padding: 24px 16px; }
-  .showcase-mobile { max-width: 104px; }
-  .showcase-tablet { max-width: 118px; }
+  .showcase { min-height: 330px; padding: 42px 18px 24px; }
+  .showcase-desktop { width: 86%; margin-left: 7%; }
+  .showcase-tablet { left: 16px; bottom: 24px; max-width: 132px; }
+  .showcase-mobile { right: 18px; bottom: 24px; max-width: 78px; }
 }
 
 /* Live-Link im Case */
