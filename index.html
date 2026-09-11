@@ -757,8 +757,8 @@ section {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 470px;
-  padding: 52px 28px 34px;
+  min-height: 450px;
+  padding: 46px 24px 28px;
 }
 
 /* gemeinsame Rahmensprache */
@@ -768,9 +768,12 @@ section {
   overflow: hidden;
   background: var(--bg-elevated);
   border: 1px solid rgba(255, 255, 255, 0.13);
+  /* gestufter Schatten: enge Kante + weiter Abwurf = Tiefe ohne Härte */
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.05) inset,
-    0 26px 56px rgba(0, 0, 0, 0.6);
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    0 14px 28px rgba(0, 0, 0, 0.4),
+    0 34px 70px rgba(0, 0, 0, 0.5);
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -781,34 +784,37 @@ section {
 /* hintere Ebene: die Kartenansicht */
 .showcase-desktop {
   position: relative;
-  width: 84%;
-  margin-left: 9%;
+  z-index: 1;
+  width: 88%;
+  margin-left: 7%;
   border-radius: 10px;
 }
 
 /* vordere Ebene: beide auf einer Linie mit dem unteren Rand */
 .showcase-tablet {
   position: absolute;
-  left: 26px;
-  bottom: 34px;
-  width: 30%;
-  max-width: 198px;
+  left: 14px;
+  bottom: 26px;
+  width: 33%;
+  max-width: 214px;
   border-radius: 10px;
+  z-index: 2;
 }
 
 .showcase-mobile {
   position: absolute;
-  right: 30px;
-  bottom: 34px;
-  width: 17%;
-  max-width: 114px;
+  right: 16px;
+  bottom: 26px;
+  width: 18.5%;
+  max-width: 124px;
   border-radius: 14px;
+  z-index: 2;
 }
 
 /* Hover: gemeinsames, ruhiges Anheben statt Auseinanderfliegen */
-.work-item:hover .showcase-desktop { transform: translateY(-8px); }
-.work-item:hover .showcase-tablet  { transform: translateY(-5px); }
-.work-item:hover .showcase-mobile  { transform: translateY(-5px); }
+.work-item:hover .showcase-desktop { transform: translateY(-10px); }
+.work-item:hover .showcase-tablet  { transform: translateY(-4px) translateX(-5px); }
+.work-item:hover .showcase-mobile  { transform: translateY(-4px) translateX(5px); }
 
 .showcase-badge {
   position: absolute;
@@ -829,8 +835,8 @@ section {
 @media (max-width: 968px) {
   .showcase { min-height: 330px; padding: 42px 18px 24px; }
   .showcase-desktop { width: 86%; margin-left: 7%; }
-  .showcase-tablet { left: 16px; bottom: 24px; max-width: 132px; }
-  .showcase-mobile { right: 18px; bottom: 24px; max-width: 78px; }
+  .showcase-tablet { left: 8px; bottom: 18px; max-width: 142px; }
+  .showcase-mobile { right: 10px; bottom: 18px; max-width: 84px; }
 }
 
 /* Live-Link im Case */
