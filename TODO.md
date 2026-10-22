@@ -30,20 +30,6 @@ und kein Rot im Motiv, sonst konkurriert es mit Gelb.
 - [ ] **Kontakt, neben dem Formular**, 1200 × 1400, Hochformat.
 - [ ] **Über mich, zweites Bild unter dem Portrait**, 1200 × 1500.
 
-## Aufräumen
-
-- [ ] **Tote Bilddateien löschen.** Werden nicht mehr referenziert,
-      liegen aber im Repo (jeweils `.jpg` und `.webp`, zusammen gut 3 MB):
-      `campus-desktop`, `campus-indoor`, `campus-mobile`, `svs-1`,
-      `svs-2`, `svs-3`, `uni-web-full`, `uni-web-hero`, `uni-handout`,
-      `uni-camp-poster`, `champers-terminal`.
-
-- [ ] **PNG-Fallbacks der Mockups verkleinern.** `campus-mockup.png`,
-      `svs-mockup.png` und `uni-mockup.png` liegen bei 1,2 bis 1,6 MB.
-      Sie laden nur in Browsern ohne WebP-Unterstützung, belasten aber
-      das Repo. Entweder stark komprimieren oder ersatzlos streichen und
-      das `<picture>` auf die WebP-Quelle reduzieren.
-
 ## Nach dem nächsten Push
 
 - [ ] **Google Search Console.** Property für clnmedia.de anlegen und

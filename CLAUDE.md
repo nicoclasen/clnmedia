@@ -26,7 +26,7 @@ Deployment laeuft ueber Vercel. `vercel.json` setzt `cleanUrls`, die Rechtsseite
 
 - [index.html](index.html) — die komplette Seite. Ein einziger `<style>`-Block am Anfang, ein einziger `<script>`-Block am Ende, dazwischen das Markup. Sektionen sind mit `<!-- ===== NAME ===== -->` abgetrennt und tragen die IDs, auf die die Navigation ankert: `work`, `services`, `about`, `skills`, `contact`.
 - [impressum.html](impressum.html), [datenschutz.html](datenschutz.html) — eigenstaendige Seiten mit eigener Kopie der CSS-Variablen und des Cursor-/Nav-Skripts. Sie haben kein mobiles Menue.
-- [images/](images/) — jedes Bild liegt als `.webp` und `.jpg` vor.
+- [images/](images/) — Seitenbilder liegen nur als `.webp` vor, siehe unten.
 
 Es gibt keine gemeinsame CSS- oder JS-Datei. Design-Tokens (`--bg`, `--accent`, `--font-display` …) stehen dreimal im Repo, einmal pro HTML-Datei. Farb- oder Schriftaenderungen muessen in allen drei Dateien nachgezogen werden.
 
@@ -62,7 +62,9 @@ Achtung bei den Farbtoken: `index.html` enthält **zwei** `:root`-Blöcke. Maßg
 
 **Kein eigener Cursor mehr.** Das `.cursor`-Div und das zugehoerige Skript liegen noch im Markup, sind aber per `display: none` und `cursor: auto` stillgelegt. Nicht wiederbeleben, es war eines der Vorlagen-Signale.
 
-**Bilder.** Immer als `<picture>` mit WebP-Source und einem Fallback, immer mit `width`, `height`, `loading="lazy"` und `decoding="async"`. Freigestellte Mockups brauchen Transparenz, dort ist der Fallback PNG statt JPG (`campus-mockup`, `svs-mockup`).
+**Bilder.** Nur noch WebP, ein schlichtes `<img src="/images/....webp">` ohne `<picture>` und ohne JPG- oder PNG-Fallback. Die Fallbacks waren bis zu 1,6 MB schwer und wurden von keinem Browser der letzten fuenf Jahre je angefordert. Immer mit `width`, `height`, `loading="lazy"` und `decoding="async"`.
+
+Drei Ausnahmen bleiben in anderen Formaten, weil sie keine Seitenbilder sind: `og-image.jpg` (manche Scraper verstehen kein WebP), `champers-reel-poster.jpg` (Poster des Videos) und `nico-clasen.jpg` (steht so in den strukturierten Daten).
 
 **Hochkante Formate auf kleinen Schirmen.** Das Kampagnen-Board zeigt ein Motiv in drei Seitenverhaeltnissen, darunter einen Skyscraper mit 1:3,75. Breitengesteuerte Bilder laufen damit auf dem Telefon extrem in die Laenge, deshalb sind die Hoehen unter 969px gedeckelt: Tablet zeigt alle drei nebeneinander auf einer Grundlinie, das Telefon das Querformat oben und die beiden Hochformate darunter. Zwei Fallen dabei: das erste Kind des Boards ist die Badge, Positionsselektoren muessen deshalb `nth-of-type` verwenden, und eine feste Mindesthoehe erzeugt am unteren Rand des Tablet-Bereichs Ueberlauf.
 

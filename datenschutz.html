@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Datenschutzerkl&auml;rung, Nico Clasen und CLN Media</title>
 <meta name="description" content="Datenschutzerkl&auml;rung f&uuml;r clnmedia.de: welche Daten beim Besuch verarbeitet werden, wie das geschieht und welche Rechte du hast.">
 <meta name="author" content="Nico Clasen">
@@ -530,6 +530,23 @@ body, p, li { font-weight: 400; }
 .footer a:hover, .footer-links a:hover { color: var(--accent); box-shadow: none; }
 .footer p, .footer div { color: rgba(255,255,255,.58); }
 
+
+/* Navigation reicht bis zur Geraetekante, Inhalt bleibt unter der Statusleiste */
+.nav {
+  --nav-y: 26px;
+  padding-top: calc(var(--nav-y) + env(safe-area-inset-top, 0px));
+  padding-bottom: var(--nav-y);
+  padding-left: max(48px, env(safe-area-inset-left, 0px));
+  padding-right: max(48px, env(safe-area-inset-right, 0px));
+}
+.nav.scrolled { --nav-y: 18px; }
+@media (max-width: 768px) {
+  .nav {
+    --nav-y: 20px;
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
+  }
+}
 </style>
 </head>
 <body>
