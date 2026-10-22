@@ -549,19 +549,33 @@ body, p, li { font-weight: 400; }
    Greift in beiden Faellen und schadet im anderen nicht, weil der
    Streifen dann ausserhalb des Sichtfelds liegt.
    ====================================================================== */
+.nav { overflow: visible; }
 .nav::before {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
+  left: -50vw;
+  right: -50vw;
   bottom: 100%;
-  height: 120px;
-  background: rgba(255, 255, 255, 0.94);
+  height: 300px;
+  background: #FFFFFF;
   pointer-events: none;
 }
-/* Beim Scrollen traegt die Leiste denselben Schatten weiter nach oben */
-.nav.scrolled::before { background: rgba(255, 255, 255, 0.94); }
 
+
+/* Die gescrollte Leiste deckt jetzt vollstaendig ab. Die 94 Prozent
+   davor liessen den Inhalt dahinter durchschimmern, was beim Scrollen
+   unruhig wirkte und an der Statusleiste als Streifen auffiel. */
+.nav.scrolled { background: #FFFFFF; }
+
+/* Auf sehr schmalen Schirmen passt "Datenschutzerklaerung" sonst nicht
+   in eine Zeile und schiebt die Seite seitlich auf. */
+.legal-page h1 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+@media (max-width: 380px) {
+  .legal-page h1 { font-size: clamp(28px, 8vw, 40px); }
+}
 </style>
 </head>
 <body>
