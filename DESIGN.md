@@ -1,146 +1,161 @@
 # DESIGN.md
 
-Design-Referenz: https://pryzm.design
-Erstellt: 2026-09-10
-Status: Layout-Rhythmus verifiziert aus dem Seiten-Quelltext. Farb-, Typo- und
-Abstandswerte sind als TODO markiert und müssen aus dem kompilierten CSS
-ausgelesen werden (siehe Abschnitt "Offene Werte").
+Stand: 2026-10-21
+Vorherige Fassung (dunkel, Referenz pryzm.design) ist mit diesem Redesign
+hinfällig und vollständig ersetzt.
+
+Referenz für den Formenteil: https://www.northcdatacenters.com/de/
+Übernommen wurden zwei Gedanken, nicht das Erscheinungsbild: die weiße
+Tafel, die ein großes Bild überlappt, und die farbige Fläche mit
+angeschrägter Kante. Winkel, Farbe und Einsatzhäufigkeit sind bewusst
+anders gewählt, damit die Seite nicht wie eine Kopie wirkt.
 
 ---
 
 ## 1. Grundhaltung
 
-Dark-first. Die deklarierte Theme-Farbe ist `#0a0a0a` — kein reines Schwarz,
-sondern ein minimal aufgehelltes Near-Black. Alles Weitere baut als Licht auf
-diesem Grund auf: die Seite arbeitet nicht mit Flächenfarbe, sondern mit
-Leuchten, Glas und Korn.
+Hell statt dunkel. Der Grund ist ein leicht warmes Off-White, die weißen
+Flächen liegen darauf und tragen den Inhalt. Farbe gibt es genau eine:
+ein warmes Gelb, und das ausschließlich als Fläche mit schwarzer Schrift
+darauf. Gelbe Schrift auf Weiß kommt nicht vor, weder in Links noch in
+Hervorhebungen noch in Zahlen.
 
-Das Teure an dieser Seite ist nicht Dekoration, sondern Zurückhaltung bei
-gleichzeitig hoher Bildqualität. Die Struktur ist konventionell und ruhig; die
-Spannung entsteht ausschließlich über bewegtes, hochwertiges Bildmaterial in
-ansonsten sehr aufgeräumten Sektionen.
+Die Seite arbeitet nicht mit Effekten. Es gibt keine Verläufe, keinen
+Schein hinter dem Hero, keine Leuchtkanten, keinen eigenen Cursor.
+Tiefe entsteht über Flächenwechsel und die Überlappung von Tafel und
+Bild, nicht über Licht.
 
-## 2. Layout-Rhythmus (verifiziert)
+## 2. Farben
 
-Jede inhaltliche Sektion folgt exakt demselben Dreiklang:
+| Token | Wert | Rolle |
+|-------|------|-------|
+| `--bg` | `#FFFFFF` | Seitengrund, reines Weiß |
+| `--flaeche` | `#F1F0EC` | Chips, Platzhalter, ruhige Flächen |
+| `--plate` | `#ECEAE4` | Fläche hinter den Projektbildern |
+| `--text` | `#000000` | Überschriften, Zeichen, Linien |
+| `--text-muted` | `#3A3A38` | Fließtext |
+| `--text-dim` | `#63625C` | Meta-Zeilen, Mikrocopy |
+| `--accent` | `#FFC400` | Gelb, **nur** als Fläche |
+| `--accent-dark` | `#E8AE00` | Fokusring, Formularfokus |
+| `--rand` | `max(48px, (100vw - 1560px)/2 + 48px)` | Fluchtlinie des Seiteninhalts |
 
-1. **Eyebrow** — ein einzelnes kurzes Wort in Kleinschrift über der Headline
-   (`Flow`, `Remix`, `Embed`, `Pricing`, `FAQ`)
-2. **Headline** — kurz, im Satzbau gesprochen, Sentence Case, nie mehr als eine
-   Zeile Aussage
-3. **Eine Zeile Subline**, dann **ein einzelner Link/CTA**
+Der Grund ist Weiß, nicht Creme. Creme mit Akzentfarbe ist genau der
+Griff, den generierte Seiten nehmen, und die Seite wirkte damit matt.
+Schwarz ist echtes Schwarz, kein getöntes Fast-Schwarz.
 
-Diese Wiederholung ist das tragende Element. Kein Sektionstyp bricht aus dem
-Muster aus, keine Sektion hat mehr als einen primären Handlungspfad.
+Die Seite **endet schwarz**: Fußzeile und Abschlussband laufen auf
+`#000` beziehungsweise `#1A1A1A`. Der schwarze Block unter den
+Leistungen nimmt das vorweg.
 
-**Sektionsabfolge:**
+## 3. Die Schräge
 
-| # | Sektion | Inhaltstyp |
-|---|---------|-----------|
-| 1 | Header | Logo links, ein einzelner CTA rechts |
-| 2 | Announcement | einzeilige Neuigkeit über dem Hero |
-| 3 | Hero | Headline, eine Zeile Subline, CTA-Paar (primär + sekundär) |
-| 4 | Hero-Media | Video-Loop (`.webm`), volle Breite, mit eigenem CTA darunter |
-| 5 | Feature "Flow" | Eyebrow + Headline + Subline + Link + Bild |
-| 6 | Gallery "Remix" | Raster aus Looks: Name, ein Satz Beschreibung, Tags |
-| 7 | Feature "Embed" | wie 5, aber mit Code-Block statt Bild |
-| 8 | Pricing | zwei Tiers, Monats-/Jahres-Toggle, Feature-Listen als Bullets |
-| 9 | FAQ | Akkordeon, Fragen in gesprochener Sprache |
-| 10 | Newsletter | Bild + Headline + ein Eingabefeld + Mikrocopy darunter |
-| 11 | Closing CTA | wiederholt die Hero-CTAs wörtlich |
-| 12 | Footer | Logo, ein Satz Positionierung, zweites Newsletter-Feld, 3 Linkspalten |
+Das einzige Formzitat. Immer derselbe Winkel: die Kante läuft über
+`--cut` in der Höhe und `--cut * 2.6` in der Breite, also rund 21 Grad.
+Nie 45 Grad, das wäre die Referenz.
 
-**Bemerkenswert:** Der Hero-CTA (`Open studio`) taucht auf der Seite fünfmal
-auf — im Header, im Hero, unter dem Hero-Video, in der Preistabelle und im
-Closing. Immer identisch beschriftet. Das ist Absicht: ein einziges Ziel, kein
-konkurrierender Handlungspfad.
+Sie kommt an genau vier Stellen vor:
 
-## 3. Content-Dichte
+1. Projekttafel, an der Ecke zum Bild hin (`--cut: 22 bis 34px`)
+2. Gelbe Fläche der Leistungskarten, unten rechts (`--cut: 20px`)
+3. Gefüllte Knöpfe, unten rechts (`--cut: 9 bis 11px`)
+4. Statuszeile im Hero und Kennzahl bei Champers, unten rechts
 
-Niedrig bis mittel. Kein Fließtext über drei Zeilen außerhalb der FAQ. Feature-
-Beschreibungen sind ein bis zwei Sätze. Die Gallery-Einträge tragen jeweils
-genau einen beschreibenden Satz, sinnlich formuliert statt technisch.
+Mehr Stellen bekommt sie nicht. Jede weitere Schräge nimmt den
+vorhandenen ihre Wirkung.
 
-Die Bullets in der Preistabelle sind Nutzenaussagen, keine Feature-Namen.
+## 4. Projekte
 
-## 4. Media-Strategie
+Der ganze Bereich liegt auf `--plate` und laeuft randlos bis zur
+Fensterkante. Dadurch sitzen die weissen Tafeln auf einer durchgehenden
+Flaeche, statt als einzelne Rechtecke auf Weiss zu schweben.
 
-- Hero: Video-Loop (`.webm`), nicht Standbild
-- Feature-Sektionen: `.webp`, je ein Bild pro Sektion, nie mehrere
-- Gallery: gerastertes Vorschaubild pro Eintrag
-- Footer: dekoratives Bild als Abschluss
+Ein Projekt besteht aus zwei Teilen: `.work-visual` trägt das Bild auf
+der Fläche `--plate`, `.work-content` ist die weiße Tafel.
 
-Format `.webm`/`.webp` durchgängig — Ladezeit ist erkennbar Teil der
-Qualitätshaltung.
+Die Projektreihen laufen **bis an die Fensterkante**, nicht bis zum
+Container. `.work-list` bricht dafür mit `margin-inline: calc(50% - 50vw)`
+aus. Der Text in der Tafel hält trotzdem über `--rand` die Fluchtlinie
+der übrigen Seite, sonst klebt er am Rand.
 
-## 5. Motion
+Beide liegen in derselben Rasterzeile eines zwölfspaltigen Grids und
+überlappen sich um eine Spalte:
 
-**TODO — nicht aus dem Quelltext ablesbar.** Zu prüfen: ob Sektionen beim
-Scrollen eingeblendet werden, ob es Parallax gibt, wie Hover-States auf den
-Gallery-Karten reagieren. Vermutung aufgrund der Produktgattung (WebGL-
-Hintergrundgenerator): Bewegung liegt im Bildmaterial selbst, das Interface
-darum herum bewegt sich kaum.
+- `img-left`: Bild `1 / 8`, Tafel `7 / 13`, Schräge oben links
+- `img-right`: Bild `6 / 13`, Tafel `1 / 7`, Schräge oben rechts
 
-## 6. Offene Werte (aus dem CSS zu ergänzen)
+Die Bildseite bekommt auf der Überlappungsseite 13 Prozent zusätzlichen
+Innenabstand, sonst verschwindet der Bildrand unter der Tafel.
 
-Diese Werte sind für ein Design-System zwingend und hier bewusst leer, statt
-geraten:
+Projektbilder sind freigestellte PNG-Mockups ohne Rahmen. Geräterahmen
+aus CSS gibt es nicht mehr: wenn ein Mockup schon ein Gerät zeigt, wirkt
+ein zweiter Rahmen darum gebastelt.
 
-- **Farbsystem**: bekannt ist nur `#0a0a0a` (Theme-Color). Fehlen: Textfarben
-  primär/sekundär, Rahmenfarbe, Akzentfarbe, Surface-Abstufungen für Karten
-- **Typo-Skala**: Schriftpaarung, Größen für Eyebrow / H1 / H2 / Body / Mikrocopy,
-  Zeilenhöhen, Letter-Spacing der Eyebrows
-- **Abstandssystem**: Basiseinheit, vertikaler Sektionsabstand, Innenabstände
-  von Karten und Preisboxen
-- **Radien**: Karten, Buttons, Eingabefelder
-- **Container-Breite** und Rasterverhalten der Gallery über Breakpoints
+Die Seiten wechseln von Projekt zu Projekt. Unter 900px steht das Bild
+oben und die Tafel rückt mit `-44px` darüber; die Reihenfolge wird dort
+über `order` erzwungen, weil im Markup mal die Tafel und mal das Bild
+zuerst steht.
 
-## 7. Übertragbare Prinzipien
+Der Text in der Tafel sind genau drei Sätze: Aufgabe, was ich gemacht
+habe, Ergebnis. Keine Labels davor, keine Zwischenüberschriften. Der
+Knopf „Projekt ansehen" steht nur dort, wo es etwas Öffentliches zu
+sehen gibt, derzeit allein bei der Campuskarte.
 
-Unabhängig von den konkreten Werten sind das die Regeln, die diese Seite teuer
-wirken lassen:
+## 5. Leistungen
 
-1. Ein einziges Sektionsmuster, ausnahmslos durchgehalten
-2. Ein einziger primärer CTA, wörtlich identisch wiederholt
-3. Near-Black statt Schwarz als Grund
-4. Bewegtes Bildmaterial als einziger visueller Aufwand — das Interface bleibt still
-5. Headlines gesprochen, nicht beworben; Sentence Case
-6. Mikrocopy unter jedem Eingabefeld, die Bedenken vorwegnimmt
-7. Sichtbare Großzügigkeit im Leerraum statt zusätzlicher Elemente
+Drei weiße Karten nebeneinander. Oben links eine gelbe Fläche von
+92 × 78px mit angeschrägter Unterkante, darin ein Strichzeichen als
+Inline-SVG in `--text`. Die gelbe Fläche sitzt bündig in der Ecke, der
+Text darunter hat seitlich Innenabstand.
 
----
+Es sind bewusst drei und nicht vier: „Automatisierung mit KI" ist als
+vierte Karte vorgesehen, soll aber noch nicht genannt werden.
 
-## 8. Umsetzung auf clnmedia.de (2026-09-10)
+## 6. Typografie
 
-Wie die sieben Prinzipien auf dieser Seite gelandet sind. Der Code dazu liegt
-gebündelt am Ende des Style-Blocks in `index.html` unter der Überschrift
-**"STILLE EBENE"**.
+General Sans für alles. Barlow Condensed nur noch für die Wortmarke.
+Keine Monoschrift, keine kursive Auszeichnungsschrift.
 
-| Prinzip | Umsetzung |
-|---------|-----------|
-| 1 Ein Sektionsmuster | Jeder `.section-header` ist ein Block: Eyebrow (ein Wort), Headline, eine Zeile Subline, höchstens ein Link. Die Nummerierung in den Eyebrows ("Arbeiten / 002") ist entfallen. |
-| 2 Ein CTA | "Gespräch starten" steht viermal auf der Seite: Navigation, Hero, Arbeiten-Kopf, Leistungs-Block. Wortgleich, nie umformuliert. |
-| 3 Near-Black | `--bg: #0A0A0A` im maßgeblichen Token-Block ("ART DIRECTION 2026"). |
-| 4 Stilles Interface | Rahmen-Hover neutral statt rot (`--border-hover`), Projektkacheln ohne Farbwechsel. Bewegung bleibt in den Case-Animationen. |
-| 5 Sentence Case | Alle großen Headlines laufen in General Sans, Gewicht 500, eng gesetzt, ohne Versalien. Die zweite Zeile steht in `--text-muted` statt in Rot. |
-| 5b Eine Schriftfamilie | Die Monoschrift ist ersatzlos entfallen. Eyebrows, Labels, Buttons und Mikrocopy laufen über `--font-label` ebenfalls in General Sans, versal und weit gesperrt. |
-| 6 Mikrocopy | "Antwort in der Regel innerhalb von 24 Stunden" unter dem Hero-CTA, dazu der Datenschutz-Hinweis unter dem Absenden-Knopf. |
-| 7 Leerraum | Sektionsabstand auf `clamp(104px, 15vh, 184px)`, Sublines auf je eine Zeile gekürzt, Index-Marker im Hero auf die Ortsangabe reduziert. |
+Keine Versalien, keine weite Sperrung. Die alte Labelsprache
+(`PROJEKTE`, `01 · WEBDESIGN & FRONTEND`) ist ersatzlos entfallen,
+samt Nummerierung. Kleinlabels unterscheiden sich jetzt über Größe und
+Farbe vom Fließtext, nicht über die Form.
 
-Bewusst abweichend von der Referenz:
+Überschriften laufen in Gewicht 500 bis 600, eng gesetzt
+(`letter-spacing: -0.035em`), einzeilig und ohne farbige zweite Zeile.
 
-- **Kein Announcement-Balken über dem Hero.** Die vorhandene Eyebrow-Zeile
-  trägt dieselbe Information. Ein zweites Band wäre ein zusätzliches Element
-  gewesen und hätte Prinzip 7 widersprochen.
-- **Der Closing-Block trägt keinen Knopf.** In der Referenz wiederholt das
-  Closing die Hero-CTAs. Hier steht direkt darüber das Kontaktformular, ein
-  Knopf würde also auf den Container unmittelbar darüber zeigen. Der Abschluss
-  bleibt deshalb eine reine Aussage: Headline, eine Zeile, dann die Trennlinie
-  zur Wortmarke.
-- **Keine Monoschrift.** JetBrains Mono wirkte technisch statt hochwertig und
-  ist samt Google-Fonts-Einbindung entfallen. Die Seite lädt nur noch General
-  Sans (Fontshare) und Barlow Condensed für Wortmarke und Icons.
-- **Rot bleibt als Markenfarbe erhalten**, aber nur noch in Punktgröße: Logo-Dot,
-  Statuspunkt, Fokus-Ring, Hover-Farbe der Sektionslinks und ein weicher
-  Schein hinter dem Hero.
-- **Der eigene Cursor bleibt unangetastet.**
+## 7. Texte
+
+- Schlicht und kurz. Keine Werbesprache, keine Schlagworte.
+- Keine Gedankenstriche als Satzzeichen. Doppelpunkt, Komma oder Punkt.
+- Barrierefreiheit wird nirgends als Stärke genannt. Die Kontraste
+  stimmen trotzdem, das ist Handwerk und kein Verkaufsargument.
+- Nichts behaupten, was nicht belegt ist. Fehlende Inhalte bekommen
+  einen Platzhalter und eine Rückfrage.
+
+## 8. Trennstriche
+
+Es gibt praktisch keine mehr. Haarlinien über Überschriften, zwischen
+Werdegangs-Einträgen und als Raster in den Werkzeugen sind entfallen,
+weil sie das stärkste verbliebene Vorlagen-Signal waren. Gliederung
+entsteht über Abstand, Flächenwechsel und gelbe Marker:
+
+- Werdegang: Zeitraum als gelbes Schildchen links, kein Strich
+- Werkzeuge: Gruppentitel mit gelbem Unterstrich, Einträge als Chips
+- Projekt-Stichworte: Chips auf `--flaeche`, keine Punktekette
+
+Ketten aus Mittelpunkten (`A · B · C`) sind überall ersetzt. Die
+Disziplin eines Projekts steht als gelbes Schildchen, der Zeitraum
+daneben in Grau.
+
+## 9. Was es nicht mehr gibt
+
+Rot in jeder Form. Den eigenen Cursor (der Zeiger war über Knöpfen
+unsichtbar, das war ein Fehler und kommt nicht zurück). Den Schein
+hinter dem Hero. Den grünen Reichweiten-Graph bei Champers, jetzt eine
+gelbe Kennzahlfläche. Den Browserrahmen und den Hinweis „Gesamte Seite
+scrollbar" bei der Uni Lübeck. Schatten hinter den Emojis.
+Die Eyebrow-Zeilen. Die Nummerierung von Projekten, Leistungen und
+Skill-Gruppen. Die Dekokoordinate im Hero. Die Pillen-Tags unter den
+Projekten (jetzt eine Zeile mit Mittelpunkten). Die Unicode-Glyphen
+als Leistungs-Icons (jetzt Inline-SVG). Den grünen Reichweiten-Graph
+(jetzt eine graue Linie im Hintergrund).

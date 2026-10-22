@@ -3,13 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Impressum — Nico Clasen / CLN Media</title>
-<meta name="description" content="Impressum von Nico Clasen / CLN Media. Design, Frontend und Content aus Lübeck.">
+<title>Impressum, Nico Clasen und CLN Media</title>
+<meta name="description" content="Impressum von Nico Clasen, CLN Media. Angaben gem&auml;&szlig; &sect; 5 DDG, Kontakt und Steuernummer.">
+<meta name="author" content="Nico Clasen">
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://clnmedia.de/impressum">
 
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
-<meta name="theme-color" content="#0A0A0B">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#FFFFFF">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://clnmedia.de/impressum">
+<meta property="og:site_name" content="CLN Media, Nico Clasen">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="Impressum, Nico Clasen und CLN Media">
+<meta property="og:description" content="Impressum von Nico Clasen, CLN Media. Angaben gem&auml;&szlig; &sect; 5 DDG, Kontakt und Steuernummer.">
+<meta property="og:image" content="https://clnmedia.de/images/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,15 +34,15 @@
 
 <style>
 :root {
-  --bg: #0A0A0A;
-  --bg-card: #0E0E0E;
-  --bg-elevated: #131314;
-  --text: #F5F3EF;
-  --text-dim: #77736F;
-  --text-muted: #AAA6A1;
-  --accent: #FF3038;
-  --border: rgba(245, 243, 239, 0.10);
-  --border-hover: rgba(245, 243, 239, 0.30);
+  --bg: #F4F2EC;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --text: #15140F;
+  --text-dim: #6E6A60;
+  --text-muted: #4C4942;
+  --accent: #FFC62E;
+  --border: rgba(21, 20, 15, 0.12);
+  --border-hover: rgba(21, 20, 15, 0.34);
 
   --font-display: 'Barlow Condensed', 'Cabinet Grotesk', sans-serif;
   --font-editorial: 'Barlow Condensed', 'Cabinet Grotesk', sans-serif;
@@ -276,15 +290,15 @@ body::before {
    Same restrained technical system as the portfolio.
    ====================================================================== */
 :root {
-  --bg: #0A0A0A;
-  --bg-card: #0E0E0E;
-  --bg-elevated: #131314;
-  --text: #F5F3EF;
-  --text-dim: #77736F;
-  --text-muted: #AAA6A1;
-  --accent: #FF3038;
-  --border: rgba(245, 243, 239, 0.10);
-  --border-hover: rgba(245, 243, 239, 0.30);
+  --bg: #F4F2EC;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --text: #15140F;
+  --text-dim: #6E6A60;
+  --text-muted: #4C4942;
+  --accent: #FFC62E;
+  --border: rgba(21, 20, 15, 0.12);
+  --border-hover: rgba(21, 20, 15, 0.34);
   --font-display: 'Barlow Condensed', 'Cabinet Grotesk', sans-serif;
   --font-editorial: 'General Sans', sans-serif;
   --font-body: 'General Sans', sans-serif;
@@ -292,7 +306,7 @@ body::before {
 }
 
 ::selection { background: var(--accent); color: var(--text); }
-:root { color-scheme: dark; }
+:root { color-scheme: light; }
 body { cursor: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 body::before { opacity: .014; }
 .cursor { display: block; }
@@ -410,6 +424,104 @@ a, button, input, select, textarea, label, summary,
   .footer-links { gap: 16px; flex-wrap: wrap; }
 }
 
+
+/* ======================================================================
+   HELLE EBENE
+   Gleiche Haltung wie auf der Startseite: heller Grund, Gelb nur als
+   Flaeche mit schwarzer Schrift darauf, kein eigener Cursor.
+   ====================================================================== */
+html, body { background: var(--bg); color: var(--text); cursor: auto; }
+.cursor { display: none !important; }
+::selection { background: var(--accent); color: #15140F; }
+
+.nav { background: linear-gradient(to bottom, rgba(244, 242, 236, 0.92), rgba(244, 242, 236, 0)); }
+.nav.scrolled { background: rgba(244, 242, 236, 0.92); border-bottom: 1px solid var(--border); }
+.nav-links a { color: var(--text-muted); }
+.nav-links a:hover { color: var(--text); }
+.nav-logo .dot { color: var(--text); }
+
+/* Alles, was vorher rote Schrift war, laeuft in Tinte */
+.eyebrow, .legal-back, .legal-section h2, a { color: var(--text); }
+a:hover { color: var(--text); }
+
+*:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+.nav-cta {
+  padding: 10px 18px;
+  border: 0;
+  background: var(--accent);
+  color: #15140F;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 9px), calc(100% - 23px) 100%, 0 100%);
+}
+.nav-cta:hover { background: #E0A600; color: #15140F; transform: none; }
+
+/* Versalien und weite Sperrung entfallen, wie auf der Startseite */
+.eyebrow, .nav-links a, .nav-cta, .legal-back, .legal-meta, .footer-col h4,
+.legal-section h2 { text-transform: none; letter-spacing: normal; }
+.nav-links a, .nav-cta { font-size: 15px; }
+
+
+/* Schrift bleibt Tinte, auch bei Links und beim Zeiger darueber */
+.legal-page a, .legal-back, .footer-links a { color: var(--text); }
+.legal-page a { text-decoration: underline; text-underline-offset: 3px; }
+.legal-back:hover, .footer-links a:hover, .legal-page a:hover { color: var(--text); }
+.nav-logo .dot { color: var(--text); }
+.nav-links a::after { background: var(--text); }
+
+
+/* ---------- Dritte Runde: weisser Grund, kraeftigeres Gelb ---------- */
+:root {
+  --bg: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --text: #000000;
+  --text-muted: #3A3A38;
+  --text-dim: #63625C;
+  --accent: #FFC400;
+  --border: rgba(0, 0, 0, 0.10);
+  --border-hover: rgba(0, 0, 0, 0.42);
+}
+html, body { background: #FFFFFF; color: #000; }
+
+/* Der Zeiger bleibt sichtbar */
+html, body, [role="button"], [tabindex] { cursor: auto; }
+a, button, label, summary { cursor: pointer; }
+.cursor { display: none !important; }
+
+body, p, li { font-weight: 400; }
+
+.nav { background: linear-gradient(to bottom, rgba(255,255,255,.94), rgba(255,255,255,0)); }
+.nav.scrolled { background: rgba(255,255,255,.94); border-bottom: 0; box-shadow: 0 1px 0 rgba(0,0,0,.08); }
+.nav-links a { color: var(--text-muted); font-weight: 500; }
+.nav-links a:hover { color: #000; }
+.nav-logo .dot { color: var(--accent); }
+.nav-cta {
+  padding: 11px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border: 0;
+  background: var(--accent);
+  color: #000;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 9px), calc(100% - 23px) 100%, 0 100%);
+}
+.nav-cta:hover { background: #000; color: var(--accent); transform: none; }
+
+.legal-page h1 { font-weight: 650; letter-spacing: -0.04em; }
+.legal-section h2 { color: #000; font-weight: 650; }
+.legal-page p, .legal-page li { color: var(--text-muted); }
+.legal-page a, .legal-back, .footer-links a { color: #000; }
+.legal-page a { text-decoration: none; box-shadow: inset 0 -2px 0 var(--accent); }
+.legal-page a:hover { box-shadow: inset 0 -18px 0 var(--accent); }
+.legal-back { box-shadow: inset 0 -2px 0 var(--accent); border: 0; }
+
+::selection { background: var(--accent); color: #000; }
+*:focus-visible { outline: 3px solid #E8AE00; outline-offset: 2px; }
+
+/* Die Seite endet schwarz, wie auf der Startseite */
+.footer { background: #000; color: #fff; border: 0; }
+.footer a, .footer-links a { color: rgba(255,255,255,.82); box-shadow: none; }
+.footer a:hover, .footer-links a:hover { color: var(--accent); box-shadow: none; }
+.footer p, .footer div { color: rgba(255,255,255,.58); }
+
 </style>
 </head>
 <body>
@@ -423,9 +535,9 @@ a, button, input, select, textarea, label, summary,
     <li><a href="/#work">Arbeiten</a></li>
     <li><a href="/#services">Leistungen</a></li>
     <li><a href="/#about">Über</a></li>
-    <li><a href="/#skills">Skills</a></li>
+    <li><a href="/#skills">F&auml;higkeiten</a></li>
   </ul>
-  <a href="/#contact" class="nav-cta">Gespräch starten</a>
+  <a href="/#contact" class="nav-cta">Kontakt aufnehmen</a>
 </nav>
 
 <!-- ==================== IMPRESSUM ==================== -->

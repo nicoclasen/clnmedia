@@ -11,8 +11,12 @@ Portfolio-Website von Nico Clasen (clnmedia.de). Reine statische Seite: drei HTM
 Es gibt keinen Build- und keinen Lint-Schritt. Zum Ansehen einen statischen Server im Projektwurzelverzeichnis starten:
 
 ```
-python -m http.server 8000
+npx serve .
 ```
+
+`serve` loest `/impressum` und `/datenschutz` auf die passenden `.html`-Dateien auf und verhaelt sich damit wie die Produktion. `python -m http.server` tut das **nicht**: die beiden Rechtsseiten laufen dort in einen 404, weil die Links wurzel-absolut und ohne Endung gesetzt sind. Wer die Seite nur ueberfliegen will, kann Python nehmen und die Rechtsseiten direkt unter `/impressum.html` aufrufen.
+
+Noch naeher an der Produktion ist `vercel dev`, das `vercel.json` samt `cleanUrls` mitliest.
 
 Ueber `file://` oeffnen funktioniert nicht: alle Asset-Pfade sind wurzel-absolut (`/images/...`).
 
@@ -28,17 +32,27 @@ Es gibt keine gemeinsame CSS- oder JS-Datei. Design-Tokens (`--bg`, `--accent`, 
 
 ## Gestalterische Haltung
 
-Die Seite folgt der Referenz in [DESIGN.md](DESIGN.md). Vor Änderungen an Layout, Typografie oder Copy dort Abschnitt 7 und 8 lesen. Die vier Regeln, die man am leichtesten versehentlich bricht:
+Die Seite folgt [DESIGN.md](DESIGN.md). Vor Änderungen an Layout, Typografie oder Copy dort die Abschnitte 1 bis 7 lesen. Die Regeln, die man am leichtesten versehentlich bricht:
 
-- **Ein Sektionsmuster.** Eyebrow (ein Wort), Headline in Sentence Case, eine Zeile Subline, höchstens ein Link. Keine Sektion bekommt einen zweiten Handlungspfad.
-- **Ein CTA, wortgleich.** "Gespräch starten" steht viermal auf der Seite und wird nie umformuliert. Neue Buttons übernehmen genau diesen Text oder es kommt keiner dazu. Der Abschlussblock im Footer bleibt bewusst ohne Knopf, weil das Kontaktformular direkt darüber steht.
-- **Das Interface bleibt still.** Bewegung gehört in die Case-Animationen, nicht in Hover-States. Rot ist auf Punktgröße beschränkt: Logo-Dot, Statuspunkt, Fokus-Ring, Hover-Farbe von Sektionslinks.
-- **Eine Schriftfamilie.** General Sans trägt Fließtext, Headlines und über `--font-label` auch alle Kleinlabels. Es gibt keine Monoschrift mehr. Barlow Condensed (`--font-display`) bleibt nur für Wortmarke und Icons.
-- **Große Headlines** laufen in General Sans, Gewicht 500, eng gesetzt und ohne Versalien. Die zweite Zeile steht in `--text-muted`, nicht in der Akzentfarbe.
+- **Gelb ist eine Fläche, keine Schriftfarbe.** `--accent` darf als Hintergrund mit schwarzer Schrift darauf stehen, nie als `color` auf hellem Grund. Das gilt auch für Links, Zahlen, Punkte und Hover-Zustände. Wer eine neue Stelle einfärbt, prüft das zuerst.
+- **Die Schräge kommt an vier Stellen vor**, immer im selben Winkel (`--cut` hoch, `--cut * 2.6` breit, also rund 21 Grad): Projekttafel, gelbe Fläche der Leistungskarten, Knöpfe, Statuszeile im Hero. Jede weitere Schräge schwächt die vorhandenen.
+- **Keine Versalien, keine weite Sperrung.** Kleinlabels unterscheiden sich über Größe und Farbe, nicht über die Form. Die alten Eyebrow-Zeilen und die Nummerierung sind entfallen und kommen nicht zurück.
+- **Der Seitengrund ist reines Weiss.** Projekttafeln und Leistungskarten heben sich ueber Schatten und die getoente Bildflaeche ab, nicht ueber eine andere Fuellfarbe. Creme als Grund kommt nicht zurueck, die Seite wirkte damit matt.
+- **Keine Effekte.** Keine Verläufe, kein Schein, keine Leuchtkanten, kein eigener Cursor. Tiefe entsteht über Flächenwechsel und die Überlappung von Tafel und Bild.
+- **Drei Sätze pro Projekt**: Aufgabe, was ich gemacht habe, Ergebnis. Keine Labels davor. Der Knopf „Projekt ansehen" steht nur dort, wo es etwas Öffentliches zu sehen gibt.
+- **Texte schlicht und kurz.** Keine Werbesprache, keine Schlagworte, keine Gedankenstriche als Satzzeichen. Barrierefreiheit wird nirgends als Stärke genannt.
+- **Keine Trennstriche.** Haarlinien über Überschriften, zwischen Werdegangs-Einträgen und als Raster in den Werkzeugen sind entfallen. Gliederung entsteht über Abstand, Flächenwechsel und gelbe Marker. Wer einen Strich einbaut, baut das stärkste Vorlagen-Signal wieder ein.
+- **Keine Ketten aus Mittelpunkten** (`A · B · C`) und keine Pfeile hinter Knopftexten. Beides sind Vorlagen-Tells.
+- **Der Zeiger bleibt sichtbar.** `cursor: none` steht an sieben Stellen in den älteren Ebenen und wird am Ende des Style-Blocks überschrieben. Nicht wieder aktivieren.
+- **Projektreihen laufen bis zur Fensterkante**, der Text darin hält über `--rand` die Fluchtlinie der Seite.
+- **Die Seite endet schwarz.** Fußzeile `#000`, Abschlussband `#1A1A1A` direkt an der Oberkante der Fußzeile (`.footer { padding-top: 0 }`), der Block unter den Leistungen nimmt es vorweg.
+- **Der Arbeiten-Bereich liegt auf `--plate`**, randlos bis zur Fensterkante. Die weissen Tafeln sitzen auf dieser durchgehenden Flaeche, statt als einzelne Rechtecke auf Weiss zu stehen.
+- **Unterstriche an Links** liegen als `::after` unter dem Text und werden beim Zeigen dicker und tiefer. Kein Fuellen der ganzen Zeile mit Gelb, das sah nach Marker aus.
+- **`--text-dim` nicht aufhellen.** `#63625C` liegt knapp über 4,5:1 auf Weiß. Jeder hellere Wert bricht die Lesbarkeit von Meta-Zeilen und Mikrocopy.
 
-Die zugehörigen Regeln liegen gebündelt am Ende des Style-Blocks in [index.html](index.html) unter der Überschrift **"STILLE EBENE"**. Sie ist die letzte Ebene vor dem Reduced-Motion-Block und gewinnt damit gegen alles darüber. Neue Regeln dieser Haltung gehören dorthin, nicht in die früheren Ebenen.
+Die Regeln liegen gebündelt am Ende des Style-Blocks in [index.html](index.html), in dieser Reihenfolge: **„LABELS ENTFERNT"**, **„HELLE EBENE"**, **„PROJEKTE"**, **„LEISTUNGEN"**, **„DRITTE RUNDE"**, **„PROJEKTE BIS AN DEN RAND"**, **„WERDEGANG, WERKZEUGE, PORTRAIT"**. Maßgeblich ist immer die unterste: die früheren Ebenen sind historisch gewachsen und werden grossteils überschrieben. Neue Regeln gehören ans Ende, nicht in die früheren Ebenen.
 
-Achtung bei den Farbtoken: `index.html` enthält **zwei** `:root`-Blöcke. Maßgeblich ist der zweite unter "ART DIRECTION 2026". Änderungen im ersten Block bleiben wirkungslos.
+Achtung bei den Farbtoken: `index.html` enthält **zwei** `:root`-Blöcke. Maßgeblich ist der zweite unter "ART DIRECTION 2026". Änderungen im ersten Block bleiben wirkungslos. Die Token stehen außerdem je einmal in `impressum.html` und `datenschutz.html`; Farbänderungen müssen in allen drei Dateien nachgezogen werden.
 
 ## Muster, an die man sich halten sollte
 
@@ -46,9 +60,9 @@ Achtung bei den Farbtoken: `index.html` enthält **zwei** `:root`-Blöcke. Maßg
 
 **`prefers-reduced-motion` respektieren.** Alle laufenden Animationen (Auto-Scroll im Browserfenster, aufsteigende Emojis, Reichweiten-Zaehler) pruefen `window.matchMedia('(prefers-reduced-motion: reduce)')` und zeigen dann den Endzustand statt der Bewegung.
 
-**Eigener Cursor.** `body { cursor: none }` plus ein `.cursor`-Div, das der Maus folgt und bei Hover ueber `a, button, .work-item, .service-card, .career-block` waechst. Unter 768px und bei `(hover: none)` wird beides zurueckgesetzt. Neue klickbare Elementklassen in die Hover-Liste im Skript aufnehmen.
+**Kein eigener Cursor mehr.** Das `.cursor`-Div und das zugehoerige Skript liegen noch im Markup, sind aber per `display: none` und `cursor: auto` stillgelegt. Nicht wiederbeleben, es war eines der Vorlagen-Signale.
 
-**Bilder.** Immer als `<picture>` mit WebP-Source und JPG-Fallback, immer mit `width`, `height`, `loading="lazy"` und `decoding="async"`. Beim Hinzufuegen eines Bildes beide Formate erzeugen.
+**Bilder.** Immer als `<picture>` mit WebP-Source und einem Fallback, immer mit `width`, `height`, `loading="lazy"` und `decoding="async"`. Freigestellte Mockups brauchen Transparenz, dort ist der Fallback PNG statt JPG (`campus-mockup`, `svs-mockup`).
 
 **Hochkante Formate auf kleinen Schirmen.** Das Kampagnen-Board zeigt ein Motiv in drei Seitenverhaeltnissen, darunter einen Skyscraper mit 1:3,75. Breitengesteuerte Bilder laufen damit auf dem Telefon extrem in die Laenge, deshalb sind die Hoehen unter 969px gedeckelt: Tablet zeigt alle drei nebeneinander auf einer Grundlinie, das Telefon das Querformat oben und die beiden Hochformate darunter. Zwei Fallen dabei: das erste Kind des Boards ist die Badge, Positionsselektoren muessen deshalb `nth-of-type` verwenden, und eine feste Mindesthoehe erzeugt am unteren Rand des Tablet-Bereichs Ueberlauf.
 
