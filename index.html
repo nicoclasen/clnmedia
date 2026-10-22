@@ -4406,6 +4406,29 @@ a.contact-detail-value { display: inline-block; width: fit-content; justify-self
 .section-link .pfeil { width: 16px; height: 16px; }
 .section-link:hover .arrow { transform: translateX(4px); }
 
+
+/* ======================================================================
+   STATUSLEISTE ZUVERLAESSIG ABDECKEN
+   viewport-fit=cover allein reicht nicht: je nach iOS-Version setzt
+   Safari feste Elemente trotzdem unter die Statusleiste, der Inhalt
+   scrollt aber dahinter durch. Die Navigation zieht deshalb ihren
+   eigenen Hintergrund als Pseudoelement nach oben aus dem Bild heraus.
+   Greift in beiden Faellen und schadet im anderen nicht, weil der
+   Streifen dann ausserhalb des Sichtfelds liegt.
+   ====================================================================== */
+.nav::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.94);
+  pointer-events: none;
+}
+/* Beim Scrollen traegt die Leiste denselben Schatten weiter nach oben */
+.nav.scrolled::before { background: rgba(255, 255, 255, 0.94); }
+
 </style>
 </head>
 <body>
