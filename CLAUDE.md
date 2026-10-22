@@ -45,6 +45,7 @@ Die Seite folgt [DESIGN.md](DESIGN.md). Vor Änderungen an Layout, Typografie od
 - **Keine Ketten aus Mittelpunkten** (`A · B · C`) und keine Pfeile hinter Knopftexten. Beides sind Vorlagen-Tells.
 - **Der Zeiger bleibt sichtbar.** `cursor: none` steht an sieben Stellen in den älteren Ebenen und wird am Ende des Style-Blocks überschrieben. Nicht wieder aktivieren.
 - **Projektreihen laufen bis zur Fensterkante**, der Text darin hält über `--rand` die Fluchtlinie der Seite.
+- **Die Navigation ist nicht mehr fest.** Sie steht per `position: absolute` am Seitenanfang und scrollt mit nach oben weg. Grund: Safari auf dem iPhone setzt feste Elemente unter die Statusleiste, waehrend der Inhalt dahinter durchscrollt, und hinterlaesst dort einen Streifen. Weder `viewport-fit=cover` noch eine Abdeckung noch das Entfernen von `overflow-x` haben das geloest. Nur solange das Menue offen ist, wird die Leiste ueber `.nav.menu-aktiv` wieder fest, sonst waere das Kreuz zum Schliessen nicht erreichbar.
 - **Die Seite endet schwarz.** Fußzeile `#000`, Abschlussband `#1A1A1A` direkt an der Oberkante der Fußzeile (`.footer { padding-top: 0 }`), der Block unter den Leistungen nimmt es vorweg.
 - **Der Arbeiten-Bereich liegt auf `--plate`**, randlos bis zur Fensterkante. Die weissen Tafeln sitzen auf dieser durchgehenden Flaeche, statt als einzelne Rechtecke auf Weiss zu stehen.
 - **Unterstriche an Links** liegen als `::after` unter dem Text und werden beim Zeigen dicker und tiefer. Kein Fuellen der ganzen Zeile mit Gelb, das sah nach Marker aus.

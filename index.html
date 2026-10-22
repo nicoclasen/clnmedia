@@ -4443,6 +4443,18 @@ a.contact-detail-value { display: inline-block; width: fit-content; justify-self
    ====================================================================== */
 body { overflow-x: visible; }
 
+
+
+/* ======================================================================
+   OBERER RAND IN SAFARI
+   body trug ein overflow-x: hidden. In Safari auf dem iPhone haelt das
+   feste Elemente im sicheren Bereich fest, waehrend der Inhalt dahinter
+   durchscrollt. Genau daher kam der Streifen ueber der Navigation.
+   Der seitliche Ueberlauf, den die Regel verhindern sollte, tritt ohne
+   sie nicht mehr auf, von 320 bis 2560 Pixel geprueft.
+   ====================================================================== */
+body { overflow-x: visible; }
+
 /* Dazu liegt eine deckend weisse Flaeche ueber dem Bereich, in dem die
    Statusleiste sitzt. Sie haengt an der Navigation und wandert nicht
    mit dem Inhalt. */
@@ -4458,6 +4470,36 @@ body { overflow-x: visible; }
   pointer-events: none;
 }
 .nav.scrolled { background: #FFFFFF; }
+
+/* ======================================================================
+   NAVIGATION SCROLLT MIT
+   Die Leiste war fest am oberen Rand verankert. In Safari auf dem
+   iPhone setzt das System feste Elemente unter die Statusleiste,
+   waehrend der Inhalt dahinter durchscrollt, und genau dort blieb ein
+   Streifen sichtbar. Keine Abdeckung hat das zuverlaessig geloest.
+   Die Leiste steht jetzt am Seitenanfang und scrollt mit nach oben
+   weg. Damit gibt es oben nichts Festes mehr und der Streifen kann
+   gar nicht erst entstehen.
+   ====================================================================== */
+.nav {
+  position: absolute;
+  top: 0;
+}
+.nav::before { display: none; }
+.nav, .nav.scrolled { background: transparent; box-shadow: none; border-bottom: 0; }
+
+/* Das aufgeklappte Menue bleibt fest und deckt den oberen Bereich
+   grosszuegig mit ab, falls es dort eingerueckt wird. */
+.nav-menu {
+  top: -200px;
+  padding-top: calc(200px + env(safe-area-inset-top, 0px));
+}
+
+/* Solange das Menue offen ist, haengt die Leiste wieder fest, sonst
+   waere das Kreuz zum Schliessen nicht erreichbar. Sie liegt dabei
+   ueber dem Menue. */
+.nav { z-index: 120; }
+.nav.menu-aktiv { position: fixed; top: 0; }
 </style>
 </head>
 <body>
