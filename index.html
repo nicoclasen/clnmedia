@@ -4432,6 +4432,32 @@ a.contact-detail-value { display: inline-block; width: fit-content; justify-self
    davor liessen den Inhalt dahinter durchschimmern, was beim Scrollen
    unruhig wirkte und an der Statusleiste als Streifen auffiel. */
 .nav.scrolled { background: #FFFFFF; }
+
+/* ======================================================================
+   OBERER RAND IN SAFARI
+   body trug ein overflow-x: hidden. In Safari auf dem iPhone haelt das
+   feste Elemente im sicheren Bereich fest, waehrend der Inhalt dahinter
+   durchscrollt. Genau daher kam der Streifen ueber der Navigation.
+   Der seitliche Ueberlauf, den die Regel verhindern sollte, tritt ohne
+   sie nicht mehr auf, von 320 bis 2560 Pixel geprueft.
+   ====================================================================== */
+body { overflow-x: visible; }
+
+/* Dazu liegt eine deckend weisse Flaeche ueber dem Bereich, in dem die
+   Statusleiste sitzt. Sie haengt an der Navigation und wandert nicht
+   mit dem Inhalt. */
+.nav { overflow: visible; }
+.nav::before {
+  content: '';
+  position: absolute;
+  left: -50vw;
+  right: -50vw;
+  bottom: 100%;
+  height: 400px;
+  background: #FFFFFF;
+  pointer-events: none;
+}
+.nav.scrolled { background: #FFFFFF; }
 </style>
 </head>
 <body>
