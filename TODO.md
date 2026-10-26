@@ -30,6 +30,14 @@ und kein Rot im Motiv, sonst konkurriert es mit Gelb.
 - [ ] **Kontakt, neben dem Formular**, 1200 × 1400, Hochformat.
 - [ ] **Über mich, zweites Bild unter dem Portrait**, 1200 × 1500.
 
+## Geprüft, nichts zu tun
+
+Cookies, `localStorage` und `sessionStorage`: die Seite nutzt nichts davon,
+gemessen auf allen drei Seiten. Ein Einwilligungsbanner nach § 25 TDDDG ist
+deshalb nicht nötig. Externe Anfragen beim Seitenaufruf: keine.
+Wer das ändert (Analyse-Tool, eingebettete Karte, externes Video,
+Schriften von fremden Servern), muss die Lage neu bewerten.
+
 ## Nach dem nächsten Push
 
 - [ ] **Google Search Console.** Property für clnmedia.de anlegen und

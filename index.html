@@ -96,13 +96,44 @@
 }
 </script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://api.fontshare.com">
 
-<!-- PP-alike free alternatives via Fontshare: Cabinet Grotesk (as substitute) + Instrument Serif -->
-<link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&f[]=cabinet-grotesk@400,500,700,800,900&f[]=instrument-serif@400,400i&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="preload" href="/fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+/* ======================================================================
+   SCHRIFTEN, SELBST AUSGELIEFERT
+   Vorher kamen General Sans von api.fontshare.com (Indien) und Barlow
+   Condensed von fonts.googleapis.com. Beide erhielten die IP-Adresse
+   jedes Besuchers, bevor dieser irgendetwas tun konnte. Jetzt liegen
+   die Dateien im Projekt, es geht keine Anfrage mehr nach aussen.
+   General Sans ist eine Variable Font ueber die Achse 200 bis 700,
+   damit stimmen auch die Zwischengewichte 450, 550 und 650 exakt.
+   Lizenzen liegen daneben in fonts/.
+   ====================================================================== */
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Variable.woff2') format('woff2-variations'),
+       url('/fonts/GeneralSans-Variable.woff2') format('woff2');
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('/fonts/BarlowCondensed-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('/fonts/BarlowCondensed-800.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
 
 <style>
 :root {
@@ -117,8 +148,8 @@
   --border: rgba(21, 20, 15, 0.12);
   --border-hover: rgba(21, 20, 15, 0.34);
 
-  --font-display: 'Barlow Condensed', 'Cabinet Grotesk', sans-serif;
-  --font-editorial: 'Barlow Condensed', 'Cabinet Grotesk', sans-serif;
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-editorial: 'Barlow Condensed', sans-serif;
   --font-body: 'General Sans', sans-serif;
   --font-label: 'General Sans', 'Inter', system-ui, sans-serif;
 }
@@ -2202,7 +2233,7 @@ a.contact-detail-value:hover { color: var(--accent); }
   --border: rgba(21, 20, 15, 0.12);
   --border-hover: rgba(21, 20, 15, 0.34);
 
-  --font-display: 'Barlow Condensed', 'Cabinet Grotesk', sans-serif;
+  --font-display: 'Barlow Condensed', sans-serif;
   --font-editorial: 'General Sans', sans-serif;
   --font-body: 'General Sans', sans-serif;
   --font-label: 'General Sans', 'Inter', system-ui, sans-serif;

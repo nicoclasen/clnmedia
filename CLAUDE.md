@@ -71,6 +71,10 @@ Drei Ausnahmen bleiben in anderen Formaten, weil sie keine Seitenbilder sind: `o
 
 **Kontaktformular.** Laeuft ueber Web3Forms. Der Access Key steht als `hidden`-Input im Markup, dazu ein unsichtbares Honeypot-Feld. Abgesendet wird per `fetch` ohne Seitenwechsel, Rueckmeldung landet in `#formStatus`; im Fehlerfall wird auf die Mailadresse verwiesen.
 
+**Schriften liegen im Projekt.** `fonts/GeneralSans-Variable.woff2` ist eine Variable Font ueber die Achse 200 bis 700 und traegt praktisch die ganze Seite, auch die Zwischengewichte 450, 550 und 650. Dazu `BarlowCondensed-700/800.woff2` fuer die grosse Wortmarke in der Fusszeile und das mobile Menue. Die `@font-face`-Regeln stehen in einem eigenen `<style>`-Block ganz oben, vor dem Haupt-Stylesheet, die Variable Font wird zusaetzlich per `preload` angefordert.
+
+Es gehen **keine** Anfragen mehr an fonts.googleapis.com, fonts.gstatic.com oder api.fontshare.com. Das war kein Geschmacksurteil: beide Dienste bekamen die IP jedes Besuchers, bevor dieser etwas tun konnte, Fontshare sitzt zudem in Indien. Keine externe Schriftquelle wieder einbauen, sonst kommt der Abschnitt in der Datenschutzerklaerung zurueck. Neue Schnitte kommen aus der Variable Font oder als weitere Datei in `fonts/`. Die Lizenzen liegen dort daneben.
+
 **Umlaute.** Im Markup werden Umlaute teils als HTML-Entity (`&uuml;`) geschrieben, teils direkt. Beides existiert, im umgebenden Abschnitt konsistent bleiben.
 
 ## Commits
