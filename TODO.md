@@ -38,10 +38,29 @@ deshalb nicht nötig. Externe Anfragen beim Seitenaufruf: keine.
 Wer das ändert (Analyse-Tool, eingebettete Karte, externes Video,
 Schriften von fremden Servern), muss die Lage neu bewerten.
 
-## Nach dem nächsten Push
+## Lokale Auffindbarkeit (Ziel: Kundenanfragen aus der Region)
 
-- [ ] **Google Search Console.** Property für clnmedia.de anlegen und
-      `sitemap.xml` einreichen. Ohne das sieht Google die Seite nicht.
-- [ ] **Google Unternehmensprofil.** Für lokale Suchen wie
-      „Webdesign Lübeck" der stärkste einzelne Hebel, stärker als alles
-      auf der Seite selbst.
+Reihenfolge nach Wirkung. Die ersten beiden kann nur Nico selbst machen,
+sie sind zusammen wichtiger als alles auf der Seite.
+
+- [ ] **Google Search Console.** Property für clnmedia.de anlegen, am
+      einfachsten über die Vercel-Integration oder per DNS-TXT-Eintrag.
+      Dann `sitemap.xml` einreichen und für die Startseite einmal
+      „Indexierung beantragen". Ohne das kann eine neue Domain, auf die
+      nichts verlinkt, monatelang unentdeckt bleiben.
+
+- [ ] **Google Unternehmensprofil.** Für Suchen wie „Webdesign Lübeck"
+      der stärkste einzelne Hebel, weil er in die Kartenergebnisse führt,
+      wo keine Agenturseite mit dutzenden Unterseiten im Weg steht.
+      Als Dienstleistungsgebiet anlegen, ohne öffentliche Adresse:
+      - Hauptkategorie: Webdesigner
+      - Weitere: Grafikdesigner, Werbeagentur, Internetmarketing-Dienst
+      - Gebiet: Lübeck, Bad Segeberg, Bad Oldesloe, Neumünster
+      - Keine Lübecker Adresse erfinden. Das fällt auf und kostet das Profil.
+
+- [ ] **Die ersten Links setzen.** Auf clnmedia.de verlinkt bisher nichts,
+      und das ist für eine neue Domain die eigentliche Decke. Kostenlos und
+      in eigener Hand: LinkedIn-Profil (Feld „Website"), GitHub-Profil,
+      Instagram-Bio, E-Mail-Signatur. Dazu auf Nachfrage: SV Schackendorf,
+      Champers. Jeder echte Link zählt mehr als jede weitere Textänderung.
+

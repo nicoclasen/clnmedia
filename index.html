@@ -44,13 +44,26 @@
       "jobTitle": "Webdesigner und Frontend-Entwickler",
       "email": "mailto:hallo@clnmedia.de",
       "telephone": "+49 173 9273170",
-      "sameAs": ["https://www.linkedin.com/in/nico-clasen/"],
-      "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universit\u00e4t zu L\u00fcbeck" },
-      "knowsAbout": [
-        "Webdesign", "Frontend-Entwicklung", "Interface Design", "TYPO3",
-        "WordPress", "Corporate Design", "Social Media", "Content-Produktion"
+      "sameAs": [
+        "https://www.linkedin.com/in/nico-clasen/"
       ],
-      "worksFor": { "@id": "https://clnmedia.de/#clnmedia" }
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Universität zu Lübeck"
+      },
+      "knowsAbout": [
+        "Webdesign",
+        "Frontend-Entwicklung",
+        "Interface Design",
+        "TYPO3",
+        "WordPress",
+        "Corporate Design",
+        "Social Media",
+        "Content-Produktion"
+      ],
+      "worksFor": {
+        "@id": "https://clnmedia.de/#clnmedia"
+      }
     },
     {
       "@type": "ProfessionalService",
@@ -60,7 +73,9 @@
       "image": "https://clnmedia.de/images/og-image.jpg",
       "email": "mailto:hallo@clnmedia.de",
       "telephone": "+49 173 9273170",
-      "founder": { "@id": "https://clnmedia.de/#nico" },
+      "founder": {
+        "@id": "https://clnmedia.de/#nico"
+      },
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Todesfelde",
@@ -69,19 +84,79 @@
         "addressCountry": "DE"
       },
       "areaServed": [
-        { "@type": "City", "name": "L\u00fcbeck" },
-        { "@type": "State", "name": "Schleswig-Holstein" },
-        { "@type": "Country", "name": "Deutschland" }
+        {
+          "@type": "City",
+          "name": "Lübeck"
+        },
+        {
+          "@type": "City",
+          "name": "Bad Segeberg"
+        },
+        {
+          "@type": "City",
+          "name": "Bad Oldesloe"
+        },
+        {
+          "@type": "City",
+          "name": "Neumünster"
+        },
+        {
+          "@type": "City",
+          "name": "Kaltenkirchen"
+        },
+        {
+          "@type": "State",
+          "name": "Schleswig-Holstein"
+        }
       ],
       "priceRange": "Preise auf Anfrage",
       "knowsLanguage": "de",
       "makesOffer": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Websites",
-          "description": "Gestaltung und Umsetzung responsiver Websites mit WordPress, TYPO3 oder eigenem Frontend." } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Interfaces",
-          "description": "Wireframes, Prototypen und Screendesign in Figma." } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content",
-          "description": "Fotos, Videos, Reels und Grafiken, produziert vor Ort." } }
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Websites",
+            "description": "Gestaltung und Umsetzung responsiver Websites mit WordPress, TYPO3 oder eigenem Frontend."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Interfaces",
+            "description": "Wireframes, Prototypen und Screendesign in Figma."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Content",
+            "description": "Fotos, Videos, Reels und Grafiken, produziert vor Ort."
+          }
+        }
+      ],
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 53.8655,
+        "longitude": 10.6866
+      },
+      "description": "Webdesign, Interface Design und Content-Produktion für Unternehmen, Gastronomie und Vereine in Lübeck, Bad Segeberg und Umgebung.",
+      "slogan": "Websites, Inhalte und Online-Kommunikation",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
       ]
     },
     {
@@ -90,7 +165,9 @@
       "url": "https://clnmedia.de/",
       "name": "CLN Media, Nico Clasen",
       "inLanguage": "de-DE",
-      "publisher": { "@id": "https://clnmedia.de/#clnmedia" }
+      "publisher": {
+        "@id": "https://clnmedia.de/#clnmedia"
+      }
     }
   ]
 }
@@ -4531,6 +4608,71 @@ body { overflow-x: visible; }
    ueber dem Menue. */
 .nav { z-index: 120; }
 .nav.menu-aktiv { position: fixed; top: 0; }
+
+/* ======================================================================
+   ABLAUF
+   Vier Schritte, echte Reihenfolge, deshalb nummeriert. Die Nummern
+   sitzen auf derselben gelben Flaeche mit schwarzer Schrift wie die
+   Schildchen bei den Projekten. Keine Schraege, die bleibt den vier
+   Stellen vorbehalten, die DESIGN.md nennt. Keine Trennstriche.
+   ====================================================================== */
+.ablauf-raster {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(24px, 2.6vw, 40px);
+}
+
+.schritt { display: flex; flex-direction: column; }
+
+.schritt-nummer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 18px;
+  background: var(--accent);
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1;
+}
+
+.schritt-titel {
+  font-family: var(--font-body);
+  font-size: clamp(18px, 1.5vw, 21px);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #000;
+  margin: 0 0 10px;
+}
+
+.schritt-text {
+  font-size: 16px;
+  line-height: 1.62;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.ablauf-fuss {
+  margin-top: clamp(36px, 4vw, 56px);
+  padding: clamp(22px, 2.4vw, 32px);
+  background: var(--flaeche);
+  font-size: 16px;
+  line-height: 1.62;
+  color: var(--text-muted);
+  max-width: 78ch;
+}
+
+@media (max-width: 900px) {
+  .ablauf-raster { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .ablauf-raster { grid-template-columns: 1fr; gap: 28px; }
+}
+
 </style>
 </head>
 <body>
@@ -4544,6 +4686,7 @@ body { overflow-x: visible; }
   <ul class="nav-links">
     <li><a href="#work">Arbeiten</a></li>
     <li><a href="#services">Leistungen</a></li>
+    <li><a href="#ablauf">Ablauf</a></li>
     <li><a href="#about">Über</a></li>
     <li><a href="#skills">F&auml;higkeiten</a></li>
   </ul>
@@ -4558,6 +4701,7 @@ body { overflow-x: visible; }
   <ul>
     <li><a href="#work">Arbeiten</a></li>
     <li><a href="#services">Leistungen</a></li>
+    <li><a href="#ablauf">Ablauf</a></li>
     <li><a href="#about">&Uuml;ber</a></li>
     <li><a href="#skills">F&auml;higkeiten</a></li>
     <li><a href="#contact">Kontakt</a></li>
@@ -4814,7 +4958,8 @@ body { overflow-x: visible; }
         Leistungen
       </h2>
       <p class="section-desc">
-        F&uuml;r Unternehmen, Gastronomie und Vereine.
+        F&uuml;r Unternehmen, Gastronomie und Vereine in L&uuml;beck, Bad Segeberg
+        und der Umgebung. Auf Wunsch auch ortsunabh&auml;ngig.
       </p>
     </div>
 
@@ -4829,7 +4974,7 @@ body { overflow-x: visible; }
           </svg>
         </div>
         <h3 class="service-name">Websites</h3>
-        <p class="service-desc">Gestaltung und Umsetzung responsiver Websites mit WordPress, TYPO3 oder eigenem Frontend. Von der Seitenstruktur bis zum Livegang, so aufgebaut, dass dein Team die Inhalte danach selbst pflegen kann.</p>
+        <p class="service-desc">Webdesign und Umsetzung, vom ersten Entwurf bis zum Livegang. Mit WordPress, TYPO3 oder eigenem Frontend, immer f&uuml;r Handy, Tablet und Rechner. So aufgebaut, dass du oder dein Team die Inhalte danach selbst pflegen k&ouml;nnt.</p>
       </article>
 
       <article class="leistung">
@@ -4851,17 +4996,61 @@ body { overflow-x: visible; }
           </svg>
         </div>
         <h3 class="service-name">Content</h3>
-        <p class="service-desc">Fotos, Videos, Reels und Grafiken, produziert vor Ort und passend zum restlichen Auftritt. Auf Wunsch mit laufender Betreuung der Kan&auml;le.</p>
+        <p class="service-desc">Fotos, Videos, Reels und Grafiken, produziert bei dir vor Ort und passend zum restlichen Auftritt. Auf Wunsch mit laufender Betreuung von Instagram und TikTok.</p>
       </article>
     </div>
 
     <div class="services-cta-block reveal">
       <div class="services-cta-text">
         <h3>Du hast ein Projekt?</h3>
-        <p>F&uuml;r Kundenprojekte und Zusammenarbeit. Preise auf Anfrage.</p>
+        <p>Schreib mir, worum es geht und bis wann es stehen soll. Du bekommst eine
+        Einsch&auml;tzung zu Aufwand und Preis, bevor wir anfangen.</p>
       </div>
       <a href="#contact" class="btn btn-primary">Kontakt aufnehmen</a>
     </div>
+  </div>
+</section>
+
+<!-- ==================== ABLAUF ==================== -->
+<section class="ablauf" id="ablauf">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title display">
+        So l&auml;uft ein Projekt
+      </h2>
+      <p class="section-desc">
+        Vier Schritte, vom ersten Schreiben bis zur fertigen Seite.
+      </p>
+    </div>
+
+    <div class="ablauf-raster reveal">
+      <article class="schritt">
+        <span class="schritt-nummer">1</span>
+        <h3 class="schritt-titel">Gespr&auml;ch</h3>
+        <p class="schritt-text">Du schreibst mir, worum es geht. Wir telefonieren oder treffen uns, wenn du in der N&auml;he bist. Danach wei&szlig;t du, was das Projekt ungef&auml;hr kostet und wie lange es dauert.</p>
+      </article>
+      <article class="schritt">
+        <span class="schritt-nummer">2</span>
+        <h3 class="schritt-titel">Entwurf</h3>
+        <p class="schritt-text">Ich lege Struktur und Gestaltung in Figma an. Du siehst, wie die Seite aussehen wird, bevor die erste Zeile Code entsteht, und kannst sie &auml;ndern lassen, solange sie ein Entwurf ist.</p>
+      </article>
+      <article class="schritt">
+        <span class="schritt-nummer">3</span>
+        <h3 class="schritt-titel">Umsetzung</h3>
+        <p class="schritt-text">Ich baue die Seite, mit WordPress, TYPO3 oder eigenem Frontend. Zwischenst&auml;nde bekommst du zu sehen, statt erst am Ende.</p>
+      </article>
+      <article class="schritt">
+        <span class="schritt-nummer">4</span>
+        <h3 class="schritt-titel">Livegang</h3>
+        <p class="schritt-text">Die Seite geht online. Du bekommst eine Einweisung, damit du Texte und Bilder selbst &auml;ndern kannst, ohne mich zu fragen.</p>
+      </article>
+    </div>
+
+    <p class="ablauf-fuss reveal">
+      Was ich von dir brauche: Texte und Bilder, soweit vorhanden, und eine Person,
+      die entscheiden darf. Fehlen Texte oder Fotos, schreibe und produziere ich sie.
+      Zug&auml;nge zu Domain und Hosting kl&auml;ren wir im ersten Gespr&auml;ch.
+    </p>
   </div>
 </section>
 
@@ -5011,7 +5200,7 @@ body { overflow-x: visible; }
     <div class="contact-hero reveal">
       <h2>Kontakt</h2>
       <p>
-        F&uuml;r ein Projekt, eine Zusammenarbeit oder ein erstes Gespr&auml;ch.
+        F&uuml;r ein Projekt, eine Zusammenarbeit oder ein erstes Gespr&auml;ch. Vor Ort in L&uuml;beck, Bad Segeberg und Umgebung, sonst per Telefon oder Video.
       </p>
     </div>
 
@@ -5112,6 +5301,7 @@ body { overflow-x: visible; }
         <ul>
           <li><a href="#work">Arbeiten</a></li>
           <li><a href="#services">Leistungen</a></li>
+          <li><a href="#ablauf">Ablauf</a></li>
           <li><a href="#about">Über</a></li>
           <li><a href="#skills">F&auml;higkeiten</a></li>
         </ul>
