@@ -75,6 +75,10 @@ Drei Ausnahmen bleiben in anderen Formaten, weil sie keine Seitenbilder sind: `o
 
 Es gehen **keine** Anfragen mehr an fonts.googleapis.com, fonts.gstatic.com oder api.fontshare.com. Das war kein Geschmacksurteil: beide Dienste bekamen die IP jedes Besuchers, bevor dieser etwas tun konnte, Fontshare sitzt zudem in Indien. Keine externe Schriftquelle wieder einbauen, sonst kommt der Abschnitt in der Datenschutzerklaerung zurueck. Neue Schnitte kommen aus der Variable Font oder als weitere Datei in `fonts/`. Die Lizenzen liegen dort daneben.
 
+**Die H1 umschliesst beide Hero-Zeilen.** `h1.hero-titel` enthaelt zwei Spans, `.hero-name` und `.hero-role`. Vorher war die zweite Zeile ein Div und damit fuer Suchmaschinen stumm. Das H1 selbst ist per `font: inherit` neutral gestellt, die Gestaltung kommt weiter aus den beiden Klassen. Nicht wieder auseinanderziehen.
+
+**Keine Koordinaten in der JSON-LD.** Die Adresse steht auf Todesfelde, `areaServed` nennt die Staedte. Ein `geo`-Block mit Koordinaten stand einmal drin und zeigte auf Luebeck, also auf einen anderen Ort als die Adresse. Entfernt. Wer ihn zurueckholt, braucht die echten Koordinaten von Todesfelde.
+
 **Umlaute.** Im Markup werden Umlaute teils als HTML-Entity (`&uuml;`) geschrieben, teils direkt. Beides existiert, im umgebenden Abschnitt konsistent bleiben.
 
 ## Commits

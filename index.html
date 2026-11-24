@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Nico Clasen, Webdesign und Frontend aus L&uuml;beck</title>
-<meta name="description" content="Nico Clasen gestaltet und entwickelt Websites, Interfaces und Inhalte. Medieninformatiker aus L&uuml;beck, selbstst&auml;ndig f&uuml;r Unternehmen, Gastronomie und Vereine.">
+<title>Nico Clasen, Webdesign in Bad Segeberg und L&uuml;beck</title>
+<meta name="description" content="Nico Clasen gestaltet und entwickelt Websites, Interfaces und Inhalte. Medieninformatiker aus dem Kreis Segeberg, f&uuml;r Unternehmen, Gastronomie und Vereine.">
 <meta name="author" content="Nico Clasen">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://clnmedia.de/">
@@ -20,15 +20,15 @@
 <meta property="og:url" content="https://clnmedia.de/">
 <meta property="og:site_name" content="CLN Media, Nico Clasen">
 <meta property="og:locale" content="de_DE">
-<meta property="og:title" content="Nico Clasen, Webdesign und Frontend aus L&uuml;beck">
-<meta property="og:description" content="Websites, Interfaces und Inhalte. Entwurf und Umsetzung aus einer Hand, aus L&uuml;beck.">
+<meta property="og:title" content="Nico Clasen, Webdesign in Bad Segeberg und L&uuml;beck">
+<meta property="og:description" content="Websites, Interfaces und Inhalte. Entwurf und Umsetzung aus einer Hand, in Bad Segeberg, L&uuml;beck und Umgebung.">
 <meta property="og:image" content="https://clnmedia.de/images/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Nico Clasen, Websites, Interfaces und Inhalte">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Nico Clasen, Webdesign und Frontend aus L&uuml;beck">
-<meta name="twitter:description" content="Websites, Interfaces und Inhalte. Entwurf und Umsetzung aus einer Hand, aus L&uuml;beck.">
+<meta name="twitter:title" content="Nico Clasen, Webdesign in Bad Segeberg und L&uuml;beck">
+<meta name="twitter:description" content="Websites, Interfaces und Inhalte. Entwurf und Umsetzung aus einer Hand, in Bad Segeberg, L&uuml;beck und Umgebung.">
 <meta name="twitter:image" content="https://clnmedia.de/images/og-image.jpg">
 
 <script type="application/ld+json">
@@ -137,11 +137,6 @@
           }
         }
       ],
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 53.8655,
-        "longitude": 10.6866
-      },
       "description": "Webdesign, Interface Design und Content-Produktion für Unternehmen, Gastronomie und Vereine in Lübeck, Bad Segeberg und Umgebung.",
       "slogan": "Websites, Inhalte und Online-Kommunikation",
       "openingHoursSpecification": [
@@ -4673,6 +4668,16 @@ body { overflow-x: visible; }
   .ablauf-raster { grid-template-columns: 1fr; gap: 28px; }
 }
 
+
+/* ======================================================================
+   H1 UMSCHLIESST BEIDE ZEILEN
+   Die zweite Zeile war ein Div und damit fuer Suchmaschinen stumm.
+   Sie liegt jetzt in der H1. Optisch aendert sich nichts: beide Zeilen
+   behalten ihre eigenen Klassenregeln, das H1 selbst ist neutral.
+   ====================================================================== */
+.hero-titel { margin: 0; padding: 0; font: inherit; color: inherit; }
+.hero-titel .hero-name,
+.hero-titel .hero-role { display: block; }
 </style>
 </head>
 <body>
@@ -4718,8 +4723,10 @@ body { overflow-x: visible; }
 <section class="hero">
 
   <div class="hero-grid container">
-    <h1 class="hero-name">Nico Clasen.</h1>
-    <div class="hero-role">Websites, Inhalte und Online-Kommunikation.</div>
+    <h1 class="hero-titel">
+      <span class="hero-name">Nico Clasen.</span>
+      <span class="hero-role">Websites, Inhalte und Online-Kommunikation.</span>
+    </h1>
 
     <div class="hero-meta">
       <div>
